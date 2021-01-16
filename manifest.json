@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name": "DeepL opener PRO",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "permissions": ["tabs","storage","identity","identity.email", "contextMenus"],
-  "description": "Unofficial DeepL PRO chrome extension",
+  "description": "Unofficial DeepL Pro chrome extension",
   "icons": { "128": "icon128.png" },
   "web_accessible_resources": ["icon24.png"],
   "options_ui":{

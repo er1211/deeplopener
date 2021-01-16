@@ -345,7 +345,7 @@ if (document.contentType != "application/pdf") {
         rng.selectNode(elm);
         window.getSelection().removeAllRanges();
         window.getSelection().addRange(rng);
-        len = elm.innerHTML.length;
+        len = elm.innerText.length;
         if (len > 4000) {
           var conf = confirm(
             "Are you sure you want to translate this?\n\nIt costs about " +
@@ -456,7 +456,7 @@ function api_xml_translation(elm) {
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message == "get_body_length") {
-    sendResponse(document.body.innerHTML.length);
+    sendResponse(document.body.innerText.length);
   }
 });
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
