@@ -396,6 +396,8 @@ function api_xml_translation(elm) {
           elm.innerHTML = resData.translations[0].text;
         });
       } else {
+        elm.innerHTML =
+          "This is a sample of the translation results from DeepLopener PRO.";
         switch (res.status) {
           case 400:
             alert(
@@ -450,6 +452,7 @@ function api_xml_translation(elm) {
             alert("DeepLopener PRO Error : " + res.status);
         }
       }
+      window.getSelection().removeAllRanges();
     });
   });
 }

@@ -147,9 +147,25 @@ function api_word_translation(sentences, oldtabid, ispdf, selid, pup) {
                 }
               }
             );
-            classid++;
           });
         } else {
+          chrome.tabs.sendMessage(
+            oldtabid,
+            {
+              message: "translated",
+              is_pdf: ispdf,
+              txt: sentences,
+              trtxt:
+                "This is a sample of the translation results from DeepLopener PRO.",
+              classid: classid,
+              selectionid: selid,
+              popup: pup,
+            },
+            function (res) {
+              if (chrome.runtime.lastError) {
+              }
+            }
+          );
           switch (res.status) {
             case 400:
               alert(
@@ -205,6 +221,7 @@ function api_word_translation(sentences, oldtabid, ispdf, selid, pup) {
               alert("Error : " + res.status);
           }
         }
+        classid++;
       });
     });
   });
