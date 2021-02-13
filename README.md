@@ -8,7 +8,10 @@ You can launch DeepL (https://www.deepl.com) through this Google chrome extensio
 On pdf, this extension displays a frame showing translated sentences.  
 **This is a whole page translatable GoogleChrome extension that uses DeepL PRO API!**  
   
-# Install from GitHub 
+# Install from Chrome Web Store
+https://chrome.google.com/webstore/detail/deepl-opener-pro/almdndhiblbhbnoaakhgefcpmbaoljde
+
+# Install from GitHub
 - Move `chrome://extensions`.
 - Ensure that the "Developer mode" checkbox in the top right-hand corner is checked.   
 - Download `DeepLopener_PRO.zip` from  
