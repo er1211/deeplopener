@@ -156,7 +156,7 @@ function api_word_translation(sentences, oldtabid, ispdf, selid, pup) {
               is_pdf: ispdf,
               txt: sentences,
               trtxt:
-                "This is a sample of the translation results from DeepLopener PRO.",
+                "This is a sample of the translation result from DeepLopener PRO.",
               classid: classid,
               selectionid: selid,
               popup: pup,

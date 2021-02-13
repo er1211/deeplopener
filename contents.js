@@ -397,7 +397,7 @@ function api_xml_translation(elm) {
         });
       } else {
         elm.innerHTML =
-          "This is a sample of the translation results from DeepLopener PRO.";
+          "This is a sample of the translation result from DeepLopener PRO.";
         switch (res.status) {
           case 400:
             alert(
