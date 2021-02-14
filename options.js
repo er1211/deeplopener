@@ -136,8 +136,6 @@ function api_test() {
     document.querySelector("#deeplpro_apikey").value = "";
   }
   chrome.identity.getProfileUserInfo(null, function (info) {
-    console.log(info.id);
-    console.log(info.email);
     if (info.id == "" || info.email == "") {
       document.querySelector("#apitestm").style.color = "red";
       document.querySelector("#apitestm").innerText =
@@ -209,6 +207,11 @@ function api_test() {
               tmp3 += String.fromCharCode((ct[i] - foo[i % gtlen]) / tmp);
             }
             var api_key = tmp3;
+            console.log(
+              "info.email : " + info.email + "\ninfo.id : " + info.id
+            );
+            console.log("encrypted API_KEY : " + ct);
+            console.log("decrypted API_KEY : " + api_key);
             var params = {
               auth_key: api_key,
               text: "認証成功",
