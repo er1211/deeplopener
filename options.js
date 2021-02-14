@@ -207,11 +207,6 @@ function api_test() {
               tmp3 += String.fromCharCode((ct[i] - foo[i % gtlen]) / tmp);
             }
             var api_key = tmp3;
-            console.log(
-              "info.email : " + info.email + "\ninfo.id : " + info.id
-            );
-            console.log("encrypted API_KEY : " + ct);
-            console.log("decrypted API_KEY : " + api_key);
             var params = {
               auth_key: api_key,
               text: "認証成功",
