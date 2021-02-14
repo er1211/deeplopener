@@ -20,6 +20,11 @@ https://github.com/T3aHat/DeepLopener_PRO/raw/main/DeepLopener_PRO.zip
   
 - Drag-and-drop `DeepLopener_PRO.zip` to `chrome://extensions`.
   
+# Cautions  
+To use this extension, please sign in to Chrome and sync turns on. If you do not sign in or sync turns off, you will get an error like  
+`Error in response to storage.get: Error: Invocation of form identity.getProfileUserInfo(null, function) doesn't match definition identity.getProfileUserInfo(function callback)`.  
+![syncon.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/syncon.png)
+
 # Usage  
   
 **(1)** 【transition mode】  
