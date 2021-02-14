@@ -37,11 +37,14 @@ function txt_replace(txt, transtxt, classid, selid) {
         }
         if (hoverflag) {
           var left = $(this).offset().left - $(window).scrollLeft();
-          var top = $(this).offset().top - $(window).scrollTop();
+          var top =
+            $(this).offset().top -
+            $(window).scrollTop() +
+            $(this).outerHeight();
           var width = $(this).outerWidth();
           offsetCenterLeft = left + width / 2;
           $(".resultarea").css({
-            top: top - $(".resultarea").outerHeight(),
+            top: top,
             left: offsetCenterLeft - $(".resultarea").outerWidth() / 2,
           });
         }
@@ -66,7 +69,10 @@ function txt_replace(txt, transtxt, classid, selid) {
             $(".resultarea").remove();
             document.body.append(resultarea);
             var left = $(thisel).offset().left - $(window).scrollLeft();
-            var top = $(thisel).offset().top - $(window).scrollTop();
+            var top =
+              $(thisel).offset().top -
+              $(window).scrollTop() +
+              $(thisel).outerHeight();
             var width = $(thisel).outerWidth();
             offsetCenterLeft = left + width / 2;
             $(".resultarea").css({
@@ -80,7 +86,7 @@ function txt_replace(txt, transtxt, classid, selid) {
               $(".hovertxt").append($("<span>" + transtxt + "</span>"));
             }
             $(".resultarea").css({
-              top: top - $(".resultarea").outerHeight(),
+              top: top,
               left: offsetCenterLeft - $(".resultarea").outerWidth() / 2,
             });
           }

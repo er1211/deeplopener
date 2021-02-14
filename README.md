@@ -2,7 +2,7 @@
 
 [日本語解説記事](https://t3ahat.hateblo.jp/entry/2020/12/05/DeepLopener_PRO)に日本語で詳しくインストール方法や使用方法を書いているので[こちら](https://t3ahat.hateblo.jp/entry/2020/12/05/DeepLopener_PRO)を読んでください．    
 [How to install (YouTube) ](https://youtu.be/bD3ATu0IHUs)  
-[How to use (YouTube) ](https://youtu.be/fdgrNRY4jDs)  
+[How to use (YouTube) ](https://youtu.be/217STkz1ZI0)  
 
 You can launch DeepL (https://www.deepl.com) through this Google chrome extension and replace the texts that you want to translate with translation results keepking the original style.  
 On pdf, this extension displays a frame showing translated sentences.  
@@ -72,8 +72,8 @@ When "Enable", ![icon24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/
 (Default:`"Enable"`)  
   
 **HoverText**  
-![hover.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/gif/hover.gif)  
-When "Enable", the original text is displayed above the translation (and vice versa) on text-oriented replacement mode.  
+![hover2.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/gif/hover2.gif)  
+When "Enable", the original text is displayed under the translation (and vice versa) on text-oriented replacement mode.  
 (Default:`"Enable"`)  
   
   
