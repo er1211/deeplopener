@@ -6,7 +6,7 @@
 
 You can launch DeepL (https://www.deepl.com) through this Google chrome extension and replace the texts that you want to translate with translation results keepking the original style.  
 On pdf, this extension displays a frame showing translated sentences.  
-**This is a whole page translatable GoogleChrome extension that uses DeepL PRO API!**  
+**This is a whole page translatable GoogleChrome extension that uses [DeepL Pro API](https://www.deepl.com/pro#developer)!**  
   
 # Install from Chrome Web Store
 https://chrome.google.com/webstore/detail/deepl-opener-pro/almdndhiblbhbnoaakhgefcpmbaoljde
@@ -79,4 +79,4 @@ When "Enable", the original text is displayed above the translation (and vice ve
 DeepL PROを契約する際に**API使用額上限を低めに設定**することを強く推奨します．
 * 脆弱性によりAPIの秘密鍵等が流出する可能性があります． **使用する場合はリスクを考慮したうえで自己責任で使用してください．ソースコードの挙動を理解できない場合は使用しないでください．** 開発者は一切責任を負いません．
 * 定期的に身に覚えのないAPI使用履歴がないか[ご利用状況](https://www.deepl.com/pro-account.html?page=category_usage)を確認してください(月一で確認を促す警告が表示されます)．
-* 開発者はド素人なので，特にAPI鍵の保存方法に関するPullRequestを歓迎します!
+* 開発者はド素人なので，特にAPI鍵の保存方法に関するアドバイスを頂けると幸いです．
