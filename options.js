@@ -286,7 +286,7 @@ function api_test() {
 }
 
 document.querySelector(".icon").innerHTML =
-  '<p>Translation icon:(When "Enable",translation icon <img src=' +
+  '<p>Translation icon:(When "Enable", translation icon <img src=' +
   '"' +
   chrome.runtime.getURL("icon24.png") +
   '"' +
