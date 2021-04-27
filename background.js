@@ -16,7 +16,6 @@ chrome.storage.sync.get(null, function (items) {
 });
 var cmid;
 var windowid;
-let os = window.navigator.platform;
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason == "install") {
     alert(

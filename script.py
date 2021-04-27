@@ -1,3 +1,4 @@
+import os
 import zipfile
 with zipfile.ZipFile('DeepLopener_PRO.zip', 'w')as zf:
     zf.write('manifest.json')
@@ -13,3 +14,7 @@ with zipfile.ZipFile('DeepLopener_PRO.zip', 'w')as zf:
     zf.write('jquery-ui.css')
     zf.write('icon24.png')
     zf.write('icon128.png')
+    for folder, subfolders, files in os.walk('_locales'):
+        zf.write(folder)
+        for file in files:
+            zf.write(os.path.join(folder, file))
