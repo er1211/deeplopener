@@ -14,7 +14,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       document.querySelector(".icon").innerHTML =
         "<img src=" + '"' + chrome.runtime.getURL("icon24.png") + '">';
       if (ispdf) {
-        winclose();
+        document.querySelector("#pagetrans").remove();
       } else {
         chrome.tabs.query(
           { active: true, currentWindow: true },
@@ -23,7 +23,9 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
               tabs[0].id,
               { message: "selectionmode" },
               function (res) {
-                setTimeout(winclose, 15000);
+                //setTimeout(winclose, 15000);
+                if (chrome.runtime.lastError) {
+                }
               }
             );
           }
@@ -37,37 +39,63 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 
 document.querySelector("#pagetrans").onclick = function () {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(
-      tabs[0].id,
-      { message: "get_body_length" },
-      function (len) {
-        var conf = confirm(
-          "Are you sure you want to translate this?\n\nIt costs about " +
-            len +
-            " characters"
-        );
-        if (conf == true) {
-          if (len > 4000) {
-            var really = confirm(
-              "CAUTION!\n\nIt costs about " + len / 400 + " JPY!"
-            );
-            if (really == true) {
-              chrome.tabs.sendMessage(
-                tabs[0].id,
-                { message: "page_translate" },
-                function () {}
-              );
-            }
-          } else {
-            chrome.tabs.sendMessage(
-              tabs[0].id,
-              { message: "page_translate" },
-              function () {}
-            );
+    let conf = confirm("Are you sure you want to translate this page?");
+    if (conf == true) {
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        { message: "cancelSelectionMode" },
+        function (res) {
+          if (chrome.runtime.lastError) {
           }
-          winclose();
+          chrome.tabs.sendMessage(
+            tabs[0].id,
+            { message: "page_translate" },
+            function () {
+              if (chrome.runtime.lastError) {
+              }
+            }
+          );
+          window.close();
         }
-      }
-    );
+      );
+    }
   });
 };
+function restore_options() {
+  chrome.storage.sync.get(
+    {
+      target: "EN-US",
+    },
+    function (items) {
+      document.querySelector("#target").value = items.target;
+    }
+  );
+}
+
+function change() {
+  chrome.storage.sync.set(
+    {
+      target: document.querySelector("#target").value,
+    },
+    function () {
+      const save = document.querySelector("#message");
+      save.textContent = "Saved!";
+      setTimeout(function () {
+        window.close();
+      }, 500);
+      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(
+          tabs[0].id,
+          { message: "cancelSelectionMode" },
+          function (res) {
+            if (chrome.runtime.lastError) {
+            }
+          }
+        );
+      });
+    }
+  );
+}
+
+document.querySelector("#target").addEventListener("change", change);
+document.addEventListener("DOMContentLoaded", restore_options);

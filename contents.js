@@ -1,4 +1,4 @@
-console.log("DeepLopener PRO loaded");
+console.log("DeepLopener loaded");
 var api_key;
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message == "got_apikey") {
@@ -173,7 +173,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       request.selectionid +
         " Original:\n" +
         request.txt +
-        "\n\nTranslation result by DeepL Pro (deepl.com) API :\n" +
+        "\n\nTranslation result by DeepL (deepl.com) API :\n" +
         request.trtxt
     );
     if (!request.is_pdf) {
@@ -323,21 +323,17 @@ if (document.contentType != "application/pdf") {
       $(document).on("mousemove", (e) => {
         let x = e.clientX;
         let y = e.clientY;
-        if (elm != document.elementFromPoint(x, y)) {
-          try {
-            elm.style.border = "";
-          } catch {}
-        }
+        RemoveDeeplopenerselecting();
         try {
           elm = document.elementFromPoint(x, y);
-          elm.style.border = "solid 1px black";
+          elm.classList.add("deeplopenerselecting"); //elm.style.border = "solid 1px black";
         } catch {}
       });
       $(document).on("click", (e) => {
         let x = e.clientX;
         let y = e.clientY;
         elm = document.elementFromPoint(x, y);
-        elm.style.border = "";
+        RemoveDeeplopenerselecting();
         $(document).off("mousemove");
         $(document).off("contextmenu");
       });
@@ -345,7 +341,7 @@ if (document.contentType != "application/pdf") {
         let x = e.clientX;
         let y = e.clientY;
         elm = document.elementFromPoint(x, y);
-        elm.style.border = "";
+        RemoveDeeplopenerselecting();
         var rng = document.createRange();
         rng.selectNode(elm);
         window.getSelection().removeAllRanges();
@@ -368,18 +364,36 @@ if (document.contentType != "application/pdf") {
         $(document).off("contextmenu");
         return false;
       });
+    } else if (request.message == "cancelSelectionMode") {
+      sendResponse();
+      $(document).off("mousemove");
+      $(document).off("contextmenu");
+      RemoveDeeplopenerselecting();
     }
   });
+}
+
+function RemoveDeeplopenerselecting() {
+  try {
+    document
+      .querySelector(".deeplopenerselecting")
+      .classList.remove("deeplopenerselecting");
+  } catch {}
 }
 
 function api_xml_translation(elm) {
   var target_html = elm.innerHTML;
   chrome.storage.sync.get(null, function (items) {
     var target = items.target;
+    var freeflag = items.freeflag;
     if (typeof target === "undefined") {
       target = "EN-US";
     }
-    var api_url = "https://api.deepl.com/v2/translate";
+    if (freeflag == "Free") {
+      var api_url = "https://api-free.deepl.com/v2/translate";
+    } else {
+      var api_url = "https://api.deepl.com/v2/translate";
+    }
     var params = {
       auth_key: api_key,
       text: target_html,
@@ -402,59 +416,59 @@ function api_xml_translation(elm) {
         });
       } else {
         elm.innerHTML =
-          "This is a sample of the translation result from DeepLopener PRO.";
+          "This is a sample of the translation result from DeepLopener .";
         switch (res.status) {
           case 400:
             alert(
-              "DeepLopener PRO Error : " +
+              "DeepLopener Error : " +
                 res.status +
                 "\nBad request. Please check error message and your parameters."
             );
             break;
           case 403:
             alert(
-              "DeepLopener PRO Error : " +
+              "DeepLopener Error : " +
                 res.status +
                 "\nAuthorization failed. Please supply a valid auth_key parameter."
             );
             break;
           case 404:
             alert(
-              "DeepLopener PRO Error : " +
+              "DeepLopener Error : " +
                 res.status +
                 "\nThe requested resource could not be found."
             );
             break;
           case 413:
             alert(
-              "DeepLopener PRO Error : " +
+              "DeepLopener Error : " +
                 res.status +
                 "\nThe request size exceeds the limit."
             );
             break;
           case 429:
             alert(
-              "DeepLopener PRO Error : " +
+              "DeepLopener Error : " +
                 res.status +
                 "\nToo many requests. Please wait and resend your request."
             );
             break;
           case 456:
             alert(
-              "DeepLopener PRO Error : " +
+              "DeepLopener Error : " +
                 res.status +
                 "\nQuota exceeded. The character limit has been reached."
             );
             break;
           case 503:
             alert(
-              "DeepLopener PRO Error : " +
+              "DeepLopener Error : " +
                 res.status +
                 "\nResource currently unavailable. Try again later."
             );
             break;
           default:
-            alert("DeepLopener PRO Error : " + res.status);
+            alert("DeepLopener Error : " + res.status);
         }
       }
       window.getSelection().removeAllRanges();

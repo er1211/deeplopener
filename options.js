@@ -54,6 +54,7 @@ function save_options() {
           target: document.querySelector("#target").value,
           iconflag: document.querySelector("#iconflag").value,
           hoverflag: document.querySelector("#hoverflag").value,
+          freeflag: document.querySelector("#freeflag").value,
           deeplpro_apikey: tmplist,
         },
         function () {
@@ -77,6 +78,7 @@ function restore_options() {
       target: "EN-US",
       iconflag: "Enable",
       hoverflag: "Enable",
+      freeflag: "Free",
       deeplpro_apikey: "",
     },
     function (items) {
@@ -123,6 +125,7 @@ function restore_options() {
           document.querySelector("#target").value = items.target;
           document.querySelector("#iconflag").value = items.iconflag;
           document.querySelector("#hoverflag").value = items.hoverflag;
+          document.querySelector("#freeflag").value = items.freeflag;
           document.querySelector("#deeplpro_apikey").value = tmp3;
           save_options();
         }
@@ -187,6 +190,7 @@ function api_test() {
           target: document.querySelector("#target").value,
           iconflag: document.querySelector("#iconflag").value,
           hoverflag: document.querySelector("#hoverflag").value,
+          freeflag: document.querySelector("#freeflag").value,
           deeplpro_apikey: tmplist,
         },
         function () {
@@ -197,11 +201,16 @@ function api_test() {
           }, 1500);
           chrome.storage.sync.get(null, function (items) {
             var target = items.target;
+            var freeflag = items.freeflag;
             var ct = items.deeplpro_apikey;
             if (typeof target === "undefined") {
               target = "EN-US";
             }
-            var api_url = "https://api.deepl.com/v2/translate";
+            if (freeflag == "Free") {
+              var api_url = "https://api-free.deepl.com/v2/translate";
+            } else {
+              var api_url = "https://api.deepl.com/v2/translate";
+            }
             var tmp3 = "";
             for (let i = 0; i < ct.length; i++) {
               tmp3 += String.fromCharCode((ct[i] - foo[i % gtlen]) / tmp);
@@ -286,7 +295,7 @@ function api_test() {
 }
 
 document.querySelector(".icon").innerHTML =
-  '<p>Translation icon:(When "Enable", translation icon <img src=' +
+  '<p>Translation icon: (When "Enable", translation icon <img src=' +
   '"' +
   chrome.runtime.getURL("icon24.png") +
   '"' +

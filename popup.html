@@ -2,20 +2,46 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
-  <body style="font-size:1rem;min-width: 400px;max-height:10%;text-align: center;">
+  <body style="font-size:1rem;min-width: 300px;max-height:10%;text-align: center;user-select: none;">
     
-    <div style="display:flex;align-items: center;justify-content: center;"><span class="icon"></span>DeepLopener PRO</div>
-    <br>
-    <div class="detail">
-      <div>Move the cursor and right-click to select the text you want to translate.</div>
-      <br>
-      <div>The selected frame will be translated on layout-oriented replacement mode keeping the original style.</div>  
-    </div>
-    <br>
+    <div style="display:flex;align-items: center;justify-content: center;font-weight: 600;"><span class="icon"></span>DeepLopener</div>
+    <p>Target language:
+      <select id="target" style="cursor: pointer;">
+        <option value="EN-US">English(American)</option>
+        <option value="EN-GB">English(British)</option>
+        <option value="JA">日本語</option>
+        <option value="BG">Bulgarian</option>
+        <option value="ZH">Chinese</option>
+        <option value="CS">Czech</option>
+        <option value="DA">Danish</option>
+        <option value="NL">Dutch</option>
+        <option value="ET">Estonian</option>
+        <option value="FI">Finnish</option>
+        <option value="FR">French</option>
+        <option value="DE">German</option>
+        <option value="EL">Greek</option>
+        <option value="HU">Hungarian</option>
+        <option value="IT">Italian</option>          
+        <option value="LV">Latvian</option>
+        <option value="LT">Lithuanian</option>
+        <option value="PL">Polish</option>
+        <option value="PT-PT">Portuguese</option>
+        <option value="PT-BR">Portuguese(Brazilian)</option>
+        <option value="RO">Romanian</option>
+        <option value="RU">Russian</option>
+        <option value="SK">Slovak</option>
+        <option value="SL">Slovenian</option>
+        <option value="ES">Spanish</option>
+        <option value="SV">Swedish</option>
+    </select>
+  </p>
+
     <div>
-      <button type="button" id="pagetrans">Translate this page!
+      <button type="button" id="pagetrans" style="cursor: pointer;">Translate this page!
         </button>
     </div>
+    <p id="message" style="text-align: center;height: 1rem;"></p>
+
     <script src="popup.js"></script>
   </body>
 </html>

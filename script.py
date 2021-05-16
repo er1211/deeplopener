@@ -1,6 +1,6 @@
 import os
 import zipfile
-with zipfile.ZipFile('DeepLopener_PRO.zip', 'w')as zf:
+with zipfile.ZipFile('DeepLopener.zip', 'w')as zf:
     zf.write('manifest.json')
     zf.write('background.js')
     zf.write('contents.js')

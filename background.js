@@ -19,11 +19,11 @@ var windowid;
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason == "install") {
     alert(
-      'Thank you for installing DeepLopener PRO!\nBefore using this extension, input "DeepL PRO API_KEY" on options page.'
+      'Thank you for installing DeepLopener!\nBefore using this extension, input "DeepL API_KEY" on options page.'
     );
     chrome.runtime.openOptionsPage();
   } else if (details.reason == "update") {
-    var res = confirm("Please reload all tabs to adapt DeepLopener PRO.");
+    var res = confirm("Please reload all tabs to adapt DeepLopener.");
     if (res == true) {
       chrome.tabs.query({}, function (tabs) {
         for (let i = 1; i < tabs.length; i++) chrome.tabs.reload(tabs[i].id);
@@ -72,10 +72,15 @@ var classid = 0;
 function api_word_translation(sentences, oldtabid, ispdf, selid, pup) {
   chrome.storage.sync.get(null, function (items) {
     var target = items.target;
+    var freeflag = items.freeflag;
     if (typeof target === "undefined") {
       target = "EN-US";
     }
-    var api_url = "https://api.deepl.com/v2/translate";
+    if (freeflag == "Free") {
+      var api_url = "https://api-free.deepl.com/v2/translate";
+    } else {
+      var api_url = "https://api.deepl.com/v2/translate";
+    }
     var api_key;
     chrome.identity.getProfileUserInfo(null, function (info) {
       if (info.id == "" || info.email == "") {
@@ -160,7 +165,7 @@ function api_word_translation(sentences, oldtabid, ispdf, selid, pup) {
                 is_pdf: ispdf,
                 txt: sentences,
                 trtxt:
-                  "This is a sample of the translation result from DeepLopener PRO.",
+                  "This is a sample of the translation result from DeepLopener.",
                 classid: classid,
                 selectionid: selid,
                 popup: pup,

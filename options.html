@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DeepLopener PRO Options Page</title>
+  <title>DeepLopener Options Page</title>
 <meta http-equiv="content-type" charset="utf-8">
 </head>
 
 <body>
   <div style="text-align: center;">
-      <a href="https://www.youtube.com/watch?v=217STkz1ZI0" target="_blank">How to use (YouTube)</a>
+      <a href="https://www.youtube.com/watch?v=ZBT7Br3tHCc" target="_blank">How to use (YouTube)</a>
       <a href="https://github.com/T3aHat/DeepLopener_PRO#%E5%85%8D%E8%B2%AC%E4%BA%8B%E9%A0%85disclaimer" target="_blank">Disclaimer</a>
   </div>
   　<p>Target language:</p>
@@ -15,7 +15,6 @@
         <option value="EN-US">English(American)</option>
         <option value="EN-GB">English(British)</option>
         <option value="JA">日本語</option>
-
         <option value="BG">Bulgarian</option>
         <option value="ZH">Chinese</option>
         <option value="CS">Czech</option>
@@ -45,19 +44,28 @@
       <option value="Enable">Enable</option>
       <option value="Disable">Disable</option>
     </select>
-    <p class="hover">HoverText:(When "Enable", the original text is displayed under the translation (and vice versa) on text-oriented replacement mode.)</p>
+    <p class="hover">HoverText: (When "Enable", the original text is displayed under the translation (and vice versa) on text-oriented replacement mode.)
       <select id="hoverflag">
         <option value="Enable">Enable</option>
         <option value="Disable">Disable</option>
       </select>
     </p>
-    <p><a href="https://www.deepl.com/pro#developer" target="_blank">DeepL Pro API_KEY</a>
-    <input type="password" id="deeplpro_apikey"><button id="apitest">Test</button>
+
+    <p><a href="https://www.deepl.com/pro#developer" target="_blank">DeepL API_KEY:</a>
+      <span class="free">
+      <select id="freeflag">
+        <option value="Free">Free</option>
+        <option value="Pro">Pro</option>
+      </select>
+    </span>  
+    <input type="password" id="deeplpro_apikey" style="height: 1rem;"><button id="apitest">Test</button>
     </p>
     <div id="apitestm"></div>
-    <button id="save">Save</button>
+    <div style="display: flex; justify-content: center;">
+      <button id="save">Save</button>
+    </div>
     <div id="incogm"></div>
-    <div id="message" style="text-align: center;"></div>
+    <div id="message" style="text-align: center;height: 1rem;"></div>
   <script src="options.js"></script>
 </body>
 </html>
