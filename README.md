@@ -26,7 +26,7 @@ https://github.com/T3aHat/DeepLopener_PRO/raw/main/DeepLopener.zip
 
 To use this extension, please sign in to Chrome and sync turns on. If you do not sign in or sync turns off, you will get an error like  
 `Error in response to storage.get: Error: Invocation of form identity.getProfileUserInfo(null, function) doesn't match definition identity.getProfileUserInfo(function callback)`.  
-![syncon.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/gif/syncon.png)
+![syncon.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/images/syncon.png)
 
 # Usage
 
@@ -41,24 +41,24 @@ With the text to be translated selected, press `Ctrl+X` (`Command+X` on mac) twi
 On PDF, select the text you want to translate and right-click on the text and click on `PDF-DeepL:selected_text`.
 
 **(1)【transition mode】**  
-![openDeepL.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/gif/openDeepL.gif)  
+![openDeepL.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/openDeepL.gif)  
 Move to https://www.deepl.com/translator#ja/en/selected_text
 
 **(2)【layout-oriented replacement mode】**  
-![layout-oriented.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/gif/layout-oriented.gif)  
+![layout-oriented.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/layout-oriented.gif)  
 The selected frame will be translated on layout-oriented replacement mode keeping the original style.  
 If you click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/icon24.png) in the right-hand corner and
 select `Translate this page!`, the whole page contents will be translated like below.  
-![pagetranslate.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/gif/pagetranslate.gif)
+![pagetranslate.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/pagetranslate.gif)
 
 **(3)【text-oriented replacement mode】**  
-![text-oriented.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/gif/text-oriented.gif)  
+![text-oriented.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/text-oriented.gif)  
 The selected text is highlighted in red first. After traslation , it turns yellow.  
 Right-click on the translation to display the original text.If you do it again, the letters will be toggled back to translation.  
 It is recommended to use this mode separately from the layout-oriented replacement mode because the original layout will be destroyed.
 
 **(4)【PDF mode】**  
-![pdfmode.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/gif/pdfmode.gif)  
+![pdfmode.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/pdfmode.gif)  
 For sites whose MIME type is `application/pdf` (local PDF files available!), the `transition mode` changes to `PDF mode` and the other modes are disabled.  
 You can move the translation frame around freely in Drag-and-Drop, and right-clicking on the translation result frame will remove it.
 
@@ -67,18 +67,18 @@ You can move the translation frame around freely in Drag-and-Drop, and right-cli
 You can change the language of the translated text by changing this setting.  
 To change the setting, please right click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/icon24.png) in the right-hand corner and select `Options`.  
 (Default: Target : `English(American)`)  
-![open_options.png](https://github.com/T3aHat/DeepLopener_PRO/blob/main/gif/open_options.png)  
-![options.png](https://github.com/T3aHat/DeepLopener_PRO/blob/main/gif/options.png)  
+![open_options.png](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/open_options.png)  
+![options.png](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/options.png)  
 **Translation icon**  
 When "Enable", ![icon24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/icon24.png) will be displayed on the web page.  
 (Default:`"Enable"`)
 
 **HoverText**  
-![hover2.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/gif/hover2.gif)  
+![hover2.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/hover.gif)  
 When "Enable", the original text is displayed under the translation (and vice versa) on text-oriented replacement mode.  
 (Default:`"Enable"`)
 
-**DeepL API_KEY**
+**DeepL API_KEY**  
 The API of DeepL is available in two versions: `DeepL API Free` and `DeepL API Pro`.  
 Please check the version of the API you are using and configure it appropriately.
 
