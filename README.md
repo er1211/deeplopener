@@ -49,7 +49,7 @@ Move to https://www.deepl.com/translator#ja/en/selected_text
 The selected frame will be translated on layout-oriented replacement mode keeping the original style.  
 If you click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/icon24.png) in the right-hand corner and
 select `Translate this page!`, the whole page contents will be translated like below.  
-![pagetranslate.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/pagetranslate.gif)
+![pagetrans.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/pagetrans.gif)
 
 **(3)【text-oriented replacement mode】**  
 ![text-oriented.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/text-oriented.gif)  
