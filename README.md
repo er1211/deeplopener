@@ -24,9 +24,12 @@ https://github.com/T3aHat/DeepLopener_PRO/raw/main/DeepLopener.zip
 
 # Cautions
 
-To use this extension, please sign in to Chrome and sync turns on. If you do not sign in or sync turns off, you will get an error like  
-`Error in response to storage.get: Error: Invocation of form identity.getProfileUserInfo(null, function) doesn't match definition identity.getProfileUserInfo(function callback)`.  
-![syncon.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/images/syncon.png)
+- To use this extension, please sign in to Chrome and sync turns on. If you do not sign in or sync turns off, you will get an error like  
+  `Error in response to storage.get: Error: Invocation of form identity.getProfileUserInfo(null, function) doesn't match definition identity.getProfileUserInfo(function callback)`.  
+  ![syncon.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/images/syncon.png)
+- Can't use PDF mode on local PDF files?  
+  Ensure that the "Allow access to file URLs" is checked on options page of this extension like below.
+  ![allowAccessToFileURL.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/images/allowAccessToFileURL.png)
 
 # Usage
 
