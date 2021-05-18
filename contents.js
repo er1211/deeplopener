@@ -104,7 +104,7 @@ if (!ispdf) {
         RemoveDeeplopenerSelecting();
         try {
           elm = document.elementFromPoint(x, y);
-          elm.classList.add("deeplopenerselecting"); //elm.style.border = "solid 1px black";
+          elm.classList.add("deeplopenerselecting");
         } catch {}
       });
 
@@ -152,10 +152,9 @@ if (!ispdf) {
   });
 }
 
-let selectionId = 0; //text-oriented mode(selectionTrans())のたびに++
-let translationId = 0; //APIに投げるたびに++
+let selectionId = 0;
+let translationId = 0;
 function selectionTrans() {
-  //iconクリックとコマンドから入る
   del_iconNode();
   let selectTextList;
   if (window.getSelection) {
@@ -179,10 +178,10 @@ function selectionTrans() {
   trelm.innerHTML =
     "<span class='translating'>" +
     window.getSelection().toString().replace(/\n/g, "<br>") +
-    "</span>"; //翻訳中(.translating)にして中にテキストを入れる
-  window.getSelection().getRangeAt(0).deleteContents(); //選択したテキストを削除
+    "</span>";
+  window.getSelection().getRangeAt(0).deleteContents();
   window.getSelection().getRangeAt(0).insertNode(trelm);
-  window.getSelection().removeAllRanges(); //選択開放
+  window.getSelection().removeAllRanges();
   apiTranslate(
     false,
     selectTextList,
@@ -202,7 +201,6 @@ function del_iconNode() {
 }
 
 function RemoveDeeplopenerSelecting() {
-  //layoutOrientedで選んでる要素に入れたclassを消す
   try {
     document
       .querySelector(".deeplopenerselecting")
@@ -317,7 +315,7 @@ function textOrientedMode(txtlist, resData, selectionid) {
     newNode.innerHTML = translation + "<br>";
     text_oriented.appendChild(newNode);
     window.getSelection().removeAllRanges();
-    translationId++; //ここで増やす
+    translationId++;
   }
 }
 
@@ -343,13 +341,11 @@ function pdfMode(translation, translationid) {
 }
 
 function apiTranslate(iselm, elm, mode, selectionid, translationid) {
-  //selectionid, translationid: page translationなど必要ない場合は -1 にする
-  //mode: layoutOrientedMode, textOrientedMode, pdfMode(=isodf)
   let targetHtml;
   if (iselm) {
     targetHtml = elm.innerHTML;
   } else {
-    targetHtml = elm; //ただのテキストも来うる(PDF mode，text-oriented mode)
+    targetHtml = elm;
   }
   chrome.storage.sync.get(null, function (items) {
     let target = items.target;
