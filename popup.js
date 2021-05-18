@@ -4,36 +4,31 @@ function winclose() {
 }
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
   let url = tabs[0].url;
-  if (!url.match(/chrome:\/\//)) {
-    chrome.tabs.sendMessage(tabs[0].id, { message: "ispdf" }, function (res) {
-      if (res == true) {
-        ispdf = true;
-      } else {
-        ispdf = false;
-      }
-      document.querySelector(".icon").innerHTML =
-        "<img src=" + '"' + chrome.runtime.getURL("icon24.png") + '">';
-      if (ispdf) {
-        document.querySelector("#pagetrans").remove();
-      } else {
-        chrome.tabs.query(
-          { active: true, currentWindow: true },
-          function (tabs) {
-            chrome.tabs.sendMessage(
-              tabs[0].id,
-              { message: "selectionMode" },
-              function (res) {
-                if (chrome.runtime.lastError) {
-                }
-              }
-            );
+  chrome.tabs.sendMessage(tabs[0].id, { message: "ispdf" }, function (res) {
+    if (chrome.runtime.lastError) {
+    }
+    if (res == true) {
+      ispdf = true;
+    } else {
+      ispdf = false;
+    }
+    document.querySelector(".icon").innerHTML =
+      "<img src=" + '"' + chrome.runtime.getURL("icon24.png") + '">';
+    if (ispdf) {
+      document.querySelector("#pagetrans").remove();
+    } else {
+      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(
+          tabs[0].id,
+          { message: "selectionMode" },
+          function (res) {
+            if (chrome.runtime.lastError) {
+            }
           }
         );
-      }
-    });
-  } else {
-    winclose();
-  }
+      });
+    }
+  });
 });
 
 document.querySelector("#pagetrans").onclick = function () {
