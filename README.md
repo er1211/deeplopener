@@ -40,7 +40,7 @@ move the cursor and right-click to select the text you want to translate or clic
 **(3)** 【text-oriented replacement mode】  
 With the text to be translated selected, press `Ctrl+X` (`Command+X` on mac) twice within 1 second or click on the icon ![icno24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/icon24.png) that appears after selecting the text.  
 **(4)** 【PDF mode】  
-On PDF, select the text you want to translate and right-click on the text and click on `PDF-DeepL:selected_text`.
+On PDF, select the text you want to translate and right-click on the text and click on `DeepL:selected_text`.
 
 **(1)【transition mode】**  
 ![openDeepL.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/openDeepL.gif)  
