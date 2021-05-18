@@ -1,9 +1,9 @@
-var ispdf;
+let ispdf;
 function winclose() {
   window.close();
 }
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  var url = tabs[0].url;
+  let url = tabs[0].url;
   if (!url.match(/chrome:\/\//)) {
     chrome.tabs.sendMessage(tabs[0].id, { message: "ispdf" }, function (res) {
       if (res == true) {
@@ -21,9 +21,8 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
           function (tabs) {
             chrome.tabs.sendMessage(
               tabs[0].id,
-              { message: "selectionmode" },
+              { message: "selectionMode" },
               function (res) {
-                //setTimeout(winclose, 15000);
                 if (chrome.runtime.lastError) {
                 }
               }

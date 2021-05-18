@@ -8,18 +8,19 @@ function save_options() {
       document.querySelector("#apitestm").innerText =
         "To use this extension, please sign in to chrome and sync turns on.";
     } else {
-      var tmp = 0;
-      var tmp2 = 1;
+      let tmp = 0;
+      let tmp2 = 1;
+      let len = 0;
       if (info.id.length < info.email.length) {
-        var len = info.id.length;
+        len = info.id.length;
       } else {
-        var len = info.email.length;
+        len = info.email.length;
       }
       for (let i = 0; i < len; i++) {
         tmp += info.id.charCodeAt(i) * info.email.charCodeAt(len - i - 1);
         tmp2 *= info.id.charCodeAt(i) * info.email.charCodeAt(len - i - 1);
       }
-      var foo = [];
+      let foo = [];
       for (
         let i = Math.round(String(tmp2).length / 2);
         i < String(tmp2).length;
@@ -30,8 +31,8 @@ function save_options() {
             String(tmp2).charCodeAt(i - Math.round(String(tmp2).length / 2))
         );
       }
-      var tmplist = [];
-      var gtlen = 0;
+      let tmplist = [];
+      let gtlen = 0;
       if (
         document.querySelector("#deeplpro_apikey").value.length < foo.length
       ) {
@@ -58,7 +59,7 @@ function save_options() {
           deeplpro_apikey: tmplist,
         },
         function () {
-          var save = document.querySelector("#message");
+          let save = document.querySelector("#message");
           save.textContent = "Saved!";
           setTimeout(function () {
             save.textContent = "";
@@ -88,18 +89,19 @@ function restore_options() {
           document.querySelector("#apitestm").innerText =
             "To use this extension, please sign in to chrome and sync turns on.";
         } else {
-          var tmp = 0;
-          var tmp2 = 1;
+          let tmp = 0;
+          let tmp2 = 1;
+          let len = 0;
           if (info.id.length < info.email.length) {
-            var len = info.id.length;
+            len = info.id.length;
           } else {
-            var len = info.email.length;
+            len = info.email.length;
           }
           for (let i = 0; i < len; i++) {
             tmp += info.id.charCodeAt(i) * info.email.charCodeAt(len - i - 1);
             tmp2 *= info.id.charCodeAt(i) * info.email.charCodeAt(len - i - 1);
           }
-          var foo = [];
+          let foo = [];
           for (
             let i = Math.round(String(tmp2).length / 2);
             i < String(tmp2).length;
@@ -110,13 +112,13 @@ function restore_options() {
                 String(tmp2).charCodeAt(i - Math.round(String(tmp2).length / 2))
             );
           }
-          var gtlen = 0;
+          let gtlen = 0;
           if (items.deeplpro_apikey.length < foo.length) {
             gtlen = items.deeplpro_apikey.length;
           } else {
             gtlen = foo.length;
           }
-          var tmp3 = "";
+          let tmp3 = "";
           for (let i = 0; i < items.deeplpro_apikey.length; i++) {
             tmp3 += String.fromCharCode(
               (items.deeplpro_apikey[i] - foo[i % gtlen]) / tmp
@@ -144,18 +146,19 @@ function api_test() {
       document.querySelector("#apitestm").innerText =
         "To use this extension, please sign in to chrome and sync turns on.";
     } else {
-      var tmp = 0;
-      var tmp2 = 1;
+      let tmp = 0;
+      let tmp2 = 1;
+      let len = 0;
       if (info.id.length < info.email.length) {
-        var len = info.id.length;
+        len = info.id.length;
       } else {
-        var len = info.email.length;
+        len = info.email.length;
       }
       for (let i = 0; i < len; i++) {
         tmp += info.id.charCodeAt(i) * info.email.charCodeAt(len - i - 1);
         tmp2 *= info.id.charCodeAt(i) * info.email.charCodeAt(len - i - 1);
       }
-      var foo = [];
+      let foo = [];
       for (
         let i = Math.round(String(tmp2).length / 2);
         i < String(tmp2).length;
@@ -166,8 +169,8 @@ function api_test() {
             String(tmp2).charCodeAt(i - Math.round(String(tmp2).length / 2))
         );
       }
-      var tmplist = [];
-      var gtlen = 0;
+      let tmplist = [];
+      let gtlen = 0;
       if (
         document.querySelector("#deeplpro_apikey").value.length < foo.length
       ) {
@@ -194,34 +197,35 @@ function api_test() {
           deeplpro_apikey: tmplist,
         },
         function () {
-          var save = document.querySelector("#message");
+          let save = document.querySelector("#message");
           save.textContent = "Saved!";
           setTimeout(function () {
             save.textContent = "";
           }, 1500);
           chrome.storage.sync.get(null, function (items) {
-            var target = items.target;
-            var freeflag = items.freeflag;
-            var ct = items.deeplpro_apikey;
+            let target = items.target;
+            let freeflag = items.freeflag;
+            let ct = items.deeplpro_apikey;
             if (typeof target === "undefined") {
               target = "EN-US";
             }
+            let api_url = "";
             if (freeflag == "Free") {
-              var api_url = "https://api-free.deepl.com/v2/translate";
+              api_url = "https://api-free.deepl.com/v2/translate";
             } else {
-              var api_url = "https://api.deepl.com/v2/translate";
+              api_url = "https://api.deepl.com/v2/translate";
             }
-            var tmp3 = "";
+            let tmp3 = "";
             for (let i = 0; i < ct.length; i++) {
               tmp3 += String.fromCharCode((ct[i] - foo[i % gtlen]) / tmp);
             }
-            var api_key = tmp3;
-            var params = {
+            let api_key = tmp3;
+            let params = {
               auth_key: api_key,
               text: "認証成功",
               target_lang: target,
             };
-            var data = new URLSearchParams();
+            let data = new URLSearchParams();
             Object.keys(params).forEach((key) => data.append(key, params[key]));
             fetch(api_url, {
               method: "POST",

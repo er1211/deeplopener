@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "DeepL opener",
-  "version": "1.1.0",
-  "permissions": ["tabs","storage","identity","identity.email", "contextMenus"],
+  "version": "1.1.1",
+  "permissions": ["storage","identity","identity.email", "contextMenus"],
   "description": "__MSG_appDesc__",
   "default_locale": "en",
   "icons": { "128": "icon128.png" },

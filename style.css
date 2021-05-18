@@ -41,3 +41,8 @@
 .deeplopenerselecting {
   border: solid 1px black;
 }
+.deeplopener_icon {
+  z-index: 9999;
+  cursor: pointer;
+  position: absolute;
+}

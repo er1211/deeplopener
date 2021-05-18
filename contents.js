@@ -1,272 +1,66 @@
 console.log("DeepLopener loaded");
-var api_key;
+chrome.runtime.sendMessage({ message: "pleaseApiKey" }, function (res) {
+  if (chrome.runtime.lastError) {
+  }
+});
+let ispdf;
+if (document.contentType === "application/pdf") {
+  ispdf = true;
+} else {
+  ispdf = false;
+}
+let api_key;
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message == "got_apikey") {
     api_key = request.api_key;
     sendResponse();
+  } else if (request.message == "page_translate") {
+    $(document).off("mousemove");
+    $(document).off("contextmenu");
+    apiTranslate(true, document.body, "layoutOrientedMode", -1, -1);
+    sendResponse();
+  } else if (request.message == "ispdf") {
+    sendResponse(ispdf);
+  } else if (request.message == "ContextMenu") {
+    if (ispdf) {
+      apiTranslate(false, request.selectionText, "pdfMode", -1, translationId);
+    }
+    sendResponse(ispdf);
   }
+  return false;
 });
 
 let hoverflag = true;
+let iconflag = true;
+let seltxt = "";
 chrome.storage.sync.get(null, function (items) {
   hoverflag = items.hoverflag;
+  iconflag = items.iconflag;
   if (typeof hoverflag === "undefined" || hoverflag == "Enable") {
     hoverflag = true;
   } else {
     hoverflag = false;
   }
-});
-
-function txt_replace(txt, transtxt, classid, selid) {
-  console.log("Text-oriented replacement mode");
-  booltrans[classid] = true;
-  $(function () {
-    $(".translated" + "#" + classid)
-      .off()
-      .on("contextmenu", function () {
-        window.getSelection().removeAllRanges();
-        clickid = $(this).attr("id");
-        if (booltrans[clickid] == true) {
-          $(this).text(txt);
-          $(".hovertxt").text(transtxt);
-          booltrans[clickid] = false;
-        } else {
-          $(this).text(transtxt);
-          $(".hovertxt").text(txt);
-          booltrans[clickid] = true;
-        }
-        if (hoverflag) {
-          var left = $(this).offset().left - $(window).scrollLeft();
-          var top =
-            $(this).offset().top -
-            $(window).scrollTop() +
-            $(this).outerHeight();
-          var width = $(this).outerWidth();
-          offsetCenterLeft = left + width / 2;
-          $(".resultarea").css({
-            top: top,
-            left: offsetCenterLeft - $(".resultarea").outerWidth() / 2,
-          });
-        }
-        del_iconNode();
-        return false;
-      });
-    if (hoverflag) {
-      $(".translated" + "#" + classid).hover(
-        function () {
-          thisel = this;
-          $(window).scroll(function () {
-            if (thisel !== undefined) {
-              $(thisel).css("outline", "");
-              resultareaupdate(thisel);
-            }
-          });
-          function resultareaupdate(thisel) {
-            $(thisel).css("outline", "2px solid black");
-            var resultarea = document.createElement("div");
-            resultarea.className = "resultarea";
-            resultarea.innerHTML = "<div class=hovertxt></div>";
-            $(".resultarea").remove();
-            document.body.append(resultarea);
-            var left = $(thisel).offset().left - $(window).scrollLeft();
-            var top =
-              $(thisel).offset().top -
-              $(window).scrollTop() +
-              $(thisel).outerHeight();
-            var width = $(thisel).outerWidth();
-            offsetCenterLeft = left + width / 2;
-            $(".resultarea").css({
-              display: "block",
-              width: width * 0.75,
-            });
-            clickid = $(thisel).attr("id");
-            if (booltrans[clickid] == true) {
-              $(".hovertxt").append($("<span>" + txt + "</span>"));
-            } else {
-              $(".hovertxt").append($("<span>" + transtxt + "</span>"));
-            }
-            $(".resultarea").css({
-              top: top,
-              left: offsetCenterLeft - $(".resultarea").outerWidth() / 2,
-            });
-          }
-          resultareaupdate(this);
-        },
-        function () {
-          $(this).css("outline", "");
-          thisel = undefined;
-          $(".resultarea").remove();
-        }
-      );
-    }
-  });
-  var text_oriented = document.getElementById("text_oriented" + selid);
-  if (
-    $("#text_oriented" + selid)
-      .children()
-      .hasClass("translating")
-  ) {
-    text_oriented.innerHTML = "";
-  }
-  var newNode = document.createElement("span");
-  newNode.className = "translated";
-  newNode.setAttribute("id", classid);
-  newNode.innerHTML = transtxt + "<br>";
-  text_oriented.appendChild(newNode);
-  window.getSelection().removeAllRanges();
-}
-
-var selection;
-var selectionid = 0;
-var txtlist = [];
-var tmptxtlist = [];
-var tmptranslatedtxtlist = [];
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.message == "selection") {
-    del_iconNode();
-    if (window.getSelection) {
-      selection = window.getSelection().toString().split(/\n/g);
-      for (var i = 0; i < selection.length; i++) {
-        selection[i].replace(/[;；:：]/g, "\n");
-        if (
-          selection[i].replace(/[ 　]/g, "").replace(/%C2%A0/g, "").length == 0
-        ) {
-          selection.splice(i, 1);
-          i -= 1;
-        }
-      }
-    } else {
-      selection = "";
-    }
-    chrome.runtime.sendMessage(
-      { message: "popup", popup: request.popup, selectionid: selectionid },
-      function (res) {}
-    );
-    sendResponse(selection);
-    if (!request.popup && selection.length < 20) {
-      txtlist[selectionid] = selection;
-      tmptxtlist[selectionid] = [];
-      tmptranslatedtxtlist[selectionid] = [];
-      var trelm = document.createElement("span");
-      trelm.className = "text_oriented";
-      trelm.setAttribute("id", "text_oriented" + selectionid);
-      trelm.innerHTML =
-        "<span class='translating'>" +
-        window.getSelection().toString().replace(/\n/g, "<br>") +
-        "</span>";
-      window.getSelection().getRangeAt(0).deleteContents();
-      window.getSelection().getRangeAt(0).insertNode(trelm);
-    }
-    window.getSelection().removeAllRanges();
-    selectionid++;
-  }
-});
-
-var translatedtxtlist = [];
-var booltrans = [];
-var classid = 0;
-var num_trans = 0;
-var pdftransid = 0;
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.message == "translated") {
-    console.log(
-      request.selectionid +
-        " Original:\n" +
-        request.txt +
-        "\n\nTranslation result by DeepL (deepl.com) API :\n" +
-        request.trtxt
-    );
-    if (!request.is_pdf) {
-      var selid = request.selectionid;
-      if (request.popup) {
-        lay_replace(request.txt, request.trtxt);
-      } else {
-        tmptxtlist[selid].push(request.txt);
-        tmptranslatedtxtlist[selid].push(request.trtxt);
-        if (tmptranslatedtxtlist[selid].length == txtlist[selid].length) {
-          for (let i = 0; i < txtlist[selid].length; i++) {
-            var j = tmptxtlist[selid].indexOf(txtlist[selid][i]);
-            txt_replace(
-              txtlist[selid][i],
-              tmptranslatedtxtlist[selid][j],
-              num_trans,
-              selid
-            );
-            num_trans++;
-          }
-        }
-      }
-    } else {
-      //is_pdf mode
-      $(
-        "<span class='pdftranslated' id='pdftransid" +
-          pdftransid +
-          "''>" +
-          request.trtxt
-            .replace(/\. ([A-Z])/g, "．<br>$1")
-            .replace(/[。]/g, "．<br>") +
-          "</span>"
-      ).appendTo("html");
-      $("#pdftransid" + pdftransid).draggable({ scroll: false });
-      $(".pdftranslated").css("max-height", $(window).height() * 0.9 + "px");
-      $(".pdftranslated").resizable({
-        handles: "n, e, s, w, ne, se, sw, nw",
-      });
-      $("html").on("contextmenu", function (e) {
-        for (let i = 0; i <= pdftransid; i++) {
-          if ($(e.target).closest("#pdftransid" + i).length == 1) {
-            $($("#pdftransid" + i).remove());
-            break;
-          }
-        }
-        return false;
-      });
-      pdftransid++;
-    }
-  }
-});
-
-var seltxt = "";
-function del_iconNode() {
-  $(".par_deeplopener_icon").remove();
-}
-function send_icon() {
-  chrome.runtime.sendMessage(
-    { message: "icon", selectionid: selectionid },
-    function (res) {
-      del_iconNode();
-    }
-  );
-}
-function pdf_createtabs() {
-  chrome.runtime.sendMessage({ message: "pdf_createtabs" }, function (res) {
-    del_iconNode();
-  });
-}
-var url = document.URL;
-var iconflag = true;
-chrome.storage.sync.get(null, function (items) {
-  iconflag = items.iconflag;
   if (typeof iconflag === "undefined" || iconflag == "Enable") {
     iconflag = true;
   } else {
     iconflag = false;
   }
-  if (document.contentType != "application/pdf" && iconflag) {
+  if (!ispdf && iconflag) {
     $(function () {
       $("body").on("click", function (e) {
         function ins_iconNode() {
-          var newNode = document.createElement("p");
+          let newNode = document.createElement("p");
           newNode.className = "par_deeplopener_icon";
           newNode.innerHTML =
-            "<div class='deeplopener_icon' style='z-index:9999;cursor:pointer;position:absolute;left:" +
+            "<div class='deeplopener_icon' style='left:" +
             (e.pageX + 3) +
             "px;top:" +
             (e.pageY + 1) +
             "px;'><img src='" +
             chrome.runtime.getURL("icon24.png") +
             "'></div>";
-          newNode.addEventListener("click", send_icon, false);
+          newNode.addEventListener("click", selectionTrans, false);
           document.body.appendChild(newNode);
         }
         del_iconNode();
@@ -279,36 +73,19 @@ chrome.storage.sync.get(null, function (items) {
           ins_iconNode();
         } else {
           seltxt = "";
+          del_iconNode();
         }
       });
     });
   }
 });
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.message == "command") {
-    sendResponse(selectionid);
-  }
-});
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.message == "ispdf") {
-    let res;
-    if (document.contentType === "application/pdf") {
-      res = true;
-    } else {
-      res = false;
-    }
-    sendResponse(res);
-  }
-  return true;
-});
-var elm;
-if (document.contentType != "application/pdf") {
-  var timer = Date.now();
+if (!ispdf) {
+  let timer = Date.now();
   document.addEventListener("keydown", (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === "x") {
       if (Date.now() - timer < 1000) {
-        send_icon(); //iconではないがやることは同じ
+        selectionTrans();
       }
       timer = Date.now();
     }
@@ -318,48 +95,50 @@ if (document.contentType != "application/pdf") {
     sender,
     sendResponse
   ) {
-    if (request.message == "selectionmode") {
+    if (request.message == "selectionMode") {
       sendResponse();
+      let elm;
       $(document).on("mousemove", (e) => {
         let x = e.clientX;
         let y = e.clientY;
-        RemoveDeeplopenerselecting();
+        RemoveDeeplopenerSelecting();
         try {
           elm = document.elementFromPoint(x, y);
           elm.classList.add("deeplopenerselecting"); //elm.style.border = "solid 1px black";
         } catch {}
       });
+
       $(document).on("click", (e) => {
         let x = e.clientX;
         let y = e.clientY;
         elm = document.elementFromPoint(x, y);
-        RemoveDeeplopenerselecting();
+        RemoveDeeplopenerSelecting();
         $(document).off("mousemove");
         $(document).off("contextmenu");
       });
+
       $(document).on("contextmenu", (e) => {
         let x = e.clientX;
         let y = e.clientY;
         elm = document.elementFromPoint(x, y);
-        RemoveDeeplopenerselecting();
-        var rng = document.createRange();
+        RemoveDeeplopenerSelecting();
+        let rng = document.createRange();
         rng.selectNode(elm);
         window.getSelection().removeAllRanges();
         window.getSelection().addRange(rng);
         len = elm.innerText.length;
         if (len > 4000) {
-          var conf = confirm(
+          let conf = confirm(
             "Are you sure you want to translate this?\n\nIt costs about " +
               len +
               " characters"
           );
           if (conf == true) {
-            api_xml_translation(elm);
+            apiTranslate(true, elm, "layoutOrientedMode", -1, -1);
           }
         } else {
-          api_xml_translation(elm);
+          apiTranslate(true, elm, "layoutOrientedMode", -1, -1);
         }
-
         $(document).off("mousemove");
         $(document).off("contextmenu");
         return false;
@@ -368,41 +147,238 @@ if (document.contentType != "application/pdf") {
       sendResponse();
       $(document).off("mousemove");
       $(document).off("contextmenu");
-      RemoveDeeplopenerselecting();
+      RemoveDeeplopenerSelecting();
     }
   });
 }
 
-function RemoveDeeplopenerselecting() {
+let selectionId = 0; //text-oriented mode(selectionTrans())のたびに++
+let translationId = 0; //APIに投げるたびに++
+function selectionTrans() {
+  //iconクリックとコマンドから入る
+  del_iconNode();
+  let selectTextList;
+  if (window.getSelection) {
+    selectTextList = window.getSelection().toString().split(/\n/g);
+    for (var i = 0; i < selectTextList.length; i++) {
+      selectTextList[i].replace(/[;；:：]/g, "\n");
+      if (
+        selectTextList[i].replace(/[ 　]/g, "").replace(/%C2%A0/g, "").length ==
+        0
+      ) {
+        selectTextList.splice(i, 1);
+        i -= 1;
+      }
+    }
+  } else {
+    selectTextList = [];
+  }
+  let trelm = document.createElement("span");
+  trelm.className = "text_oriented";
+  trelm.setAttribute("id", "text_oriented" + selectionId);
+  trelm.innerHTML =
+    "<span class='translating'>" +
+    window.getSelection().toString().replace(/\n/g, "<br>") +
+    "</span>"; //翻訳中(.translating)にして中にテキストを入れる
+  window.getSelection().getRangeAt(0).deleteContents(); //選択したテキストを削除
+  window.getSelection().getRangeAt(0).insertNode(trelm);
+  window.getSelection().removeAllRanges(); //選択開放
+  apiTranslate(
+    false,
+    selectTextList,
+    "textOrientedMode",
+    selectionId,
+    translationId
+  );
+  selectionId++;
+}
+
+function del_iconNode() {
+  try {
+    document
+      .querySelectorAll(".par_deeplopener_icon")
+      .forEach((iconel) => iconel.remove());
+  } catch {}
+}
+
+function RemoveDeeplopenerSelecting() {
+  //layoutOrientedで選んでる要素に入れたclassを消す
   try {
     document
       .querySelector(".deeplopenerselecting")
       .classList.remove("deeplopenerselecting");
   } catch {}
 }
+let booltrans = [];
+function textOrientedMode(txtlist, resData, selectionid) {
+  for (let i = 0; i < resData.translations.length; i++) {
+    let translation = resData.translations[i].text;
+    let txt = txtlist[i];
+    let trid = translationId;
+    console.log(
+      translationId +
+        " Original:\n" +
+        txt +
+        "\n\nTranslation results for DeepL (deepl.com) API:\n" +
+        translation
+    );
+    booltrans[translationId] = true;
+    $(function () {
+      $(".translated" + "#" + trid)
+        .off()
+        .on("contextmenu", function () {
+          window.getSelection().removeAllRanges();
+          clickid = $(this).attr("id");
+          if (booltrans[clickid] == true) {
+            $(this).text(txt);
+            $(".hovertxt").text(translation);
+            booltrans[clickid] = false;
+          } else {
+            $(this).text(translation);
+            $(".hovertxt").text(txt);
+            booltrans[clickid] = true;
+          }
+          if (hoverflag) {
+            let left = $(this).offset().left - $(window).scrollLeft();
+            let top =
+              $(this).offset().top -
+              $(window).scrollTop() +
+              $(this).outerHeight();
+            let width = $(this).outerWidth();
+            offsetCenterLeft = left + width / 2;
+            $(".resultarea").css({
+              top: top,
+              left: offsetCenterLeft - $(".resultarea").outerWidth() / 2,
+            });
+          }
+          del_iconNode();
+          return false;
+        });
+      if (hoverflag) {
+        $(".translated" + "#" + trid).hover(
+          function () {
+            thisel = this;
+            $(window).scroll(function () {
+              if (thisel !== undefined) {
+                $(thisel).css("outline", "");
+                resultAreaUpdate(thisel);
+              }
+            });
+            function resultAreaUpdate(thisel) {
+              $(thisel).css("outline", "2px solid black");
+              let resultarea = document.createElement("div");
+              resultarea.className = "resultarea";
+              resultarea.innerHTML = "<div class=hovertxt></div>";
+              $(".resultarea").remove();
+              document.body.append(resultarea);
+              let left = $(thisel).offset().left - $(window).scrollLeft();
+              let top =
+                $(thisel).offset().top -
+                $(window).scrollTop() +
+                $(thisel).outerHeight();
+              var width = $(thisel).outerWidth();
+              offsetCenterLeft = left + width / 2;
+              $(".resultarea").css({
+                display: "block",
+                width: width * 0.75,
+              });
+              clickid = $(thisel).attr("id");
+              if (booltrans[clickid] == true) {
+                $(".hovertxt").append($("<span>" + txt + "</span>"));
+              } else {
+                $(".hovertxt").append($("<span>" + translation + "</span>"));
+              }
+              $(".resultarea").css({
+                top: top,
+                left: offsetCenterLeft - $(".resultarea").outerWidth() / 2,
+              });
+            }
+            resultAreaUpdate(this);
+          },
+          function () {
+            $(this).css("outline", "");
+            thisel = undefined;
+            $(".resultarea").remove();
+          }
+        );
+      }
+    });
+    let text_oriented = document.querySelector("#text_oriented" + selectionid);
+    if (
+      $("#text_oriented" + selectionid)
+        .children()
+        .hasClass("translating")
+    ) {
+      text_oriented.innerHTML = "";
+    }
+    let newNode = document.createElement("span");
+    newNode.className = "translated";
+    newNode.setAttribute("id", translationId);
+    newNode.innerHTML = translation + "<br>";
+    text_oriented.appendChild(newNode);
+    window.getSelection().removeAllRanges();
+    translationId++; //ここで増やす
+  }
+}
 
-function api_xml_translation(elm) {
-  var target_html = elm.innerHTML;
+function pdfMode(translation, translationid) {
+  $(
+    "<span class='pdftranslated' id='pdftransid" +
+      translationid +
+      "''>" +
+      translation
+        .replace(/\. ([A-Z])/g, "．<br>$1")
+        .replace(/[。]/g, "．<br>") +
+      "</span>"
+  ).appendTo("html");
+  $("#pdftransid" + translationid).draggable({ scroll: false });
+  $(".pdftranslated").css("max-height", $(window).height() * 0.9 + "px");
+  $(".pdftranslated").resizable({
+    handles: "n, e, s, w, ne, se, sw, nw",
+  });
+  $("html").on("contextmenu", function (e) {
+    e.target.remove();
+    return false;
+  });
+}
+
+function apiTranslate(iselm, elm, mode, selectionid, translationid) {
+  //selectionid, translationid: page translationなど必要ない場合は -1 にする
+  //mode: layoutOrientedMode, textOrientedMode, pdfMode(=isodf)
+  let targetHtml;
+  if (iselm) {
+    targetHtml = elm.innerHTML;
+  } else {
+    targetHtml = elm; //ただのテキストも来うる(PDF mode，text-oriented mode)
+  }
   chrome.storage.sync.get(null, function (items) {
-    var target = items.target;
-    var freeflag = items.freeflag;
+    let target = items.target;
+    let freeflag = items.freeflag;
     if (typeof target === "undefined") {
       target = "EN-US";
     }
+    let api_url;
     if (freeflag == "Free") {
-      var api_url = "https://api-free.deepl.com/v2/translate";
+      api_url = "https://api-free.deepl.com/v2/translate";
     } else {
-      var api_url = "https://api.deepl.com/v2/translate";
+      api_url = "https://api.deepl.com/v2/translate";
     }
-    var params = {
+    let params = {
       auth_key: api_key,
-      text: target_html,
       target_lang: target,
       tag_handling: "xml",
     };
-    var data = new URLSearchParams();
+    if (mode != "textOrientedMode") {
+      params.text = targetHtml;
+      translationId++;
+    }
+    let data = new URLSearchParams();
     Object.keys(params).forEach((key) => data.append(key, params[key]));
-
+    if (mode == "textOrientedMode") {
+      elm.forEach((text) => {
+        data.append("text", text);
+      });
+    }
     fetch(api_url, {
       method: "POST",
       headers: {
@@ -412,7 +388,14 @@ function api_xml_translation(elm) {
     }).then((res) => {
       if (res.status == "200") {
         res.json().then((resData) => {
-          elm.innerHTML = resData.translations[0].text;
+          let translation = resData.translations[0].text;
+          if (mode == "layoutOrientedMode") {
+            elm.innerHTML = translation;
+          } else if (mode == "textOrientedMode") {
+            textOrientedMode(elm, resData, selectionid);
+          } else if (mode == "pdfMode") {
+            pdfMode(translation, translationid);
+          }
         });
       } else {
         elm.innerHTML =
@@ -475,16 +458,3 @@ function api_xml_translation(elm) {
     });
   });
 }
-
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.message == "get_body_length") {
-    sendResponse(document.body.innerText.length);
-  }
-});
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.message == "page_translate") {
-    $(document).off("mousemove");
-    $(document).off("contextmenu");
-    api_xml_translation(document.body);
-  }
-});
