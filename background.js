@@ -7,7 +7,7 @@ chrome.storage.sync.get(null, function (items) {
       "Please check the usage status to see if there is any suspicious usage history."
     );
     chrome.tabs.create({
-      url: "https://www.deepl.com/pro-account.html?page=category_usage",
+      url: "https://www.deepl.com/pro-account/usage",
     });
   }
   chrome.storage.sync.set({
