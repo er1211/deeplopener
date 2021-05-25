@@ -1,82 +1,71 @@
 # DeepLopener
 
-[日本語解説記事](https://t3ahat.hateblo.jp/entry/2020/12/05/DeepLopener_PRO)に日本語で詳しくインストール方法や使用方法を書いているので[こちら](https://t3ahat.hateblo.jp/entry/2020/12/05/DeepLopener_PRO)を読んでください．  
-[How to use (YouTube) ](https://youtu.be/Ymi8D_lvwGU)
+[日本語解説記事](https://t3ahat.hateblo.jp/entry/How_to_use_DeepLopener)に日本語で詳しくインストール方法や使用方法を書いているので[こちら](https://t3ahat.hateblo.jp/entry/How_to_use_DeepLopener)を読んでください．  
+[How to use (YouTube) ](https://youtu.be/YlKi-NVJV-E)
 
 You can launch DeepL (https://www.deepl.com) through this Google chrome extension and replace the texts that you want to translate with translation results keepking the original style.  
-On pdf, this extension displays a frame showing translated sentences.  
-**This is a whole page translatable GoogleChrome extension that uses [DeepL API](https://www.deepl.com/pro#developer)!**
+On pdf, this extension displays a frame showing translated sentences.
 
 # Install from Chrome Web Store
 
-https://chrome.google.com/webstore/detail/deepl-opener-pro/almdndhiblbhbnoaakhgefcpmbaoljde
-
-# Install from GitHub
-
-- Move `chrome://extensions`.
-- Ensure that the "Developer mode" checkbox in the top right-hand corner is checked.
-- Download `DeepLopener.zip` from
-
-https://github.com/T3aHat/DeepLopener_PRO/raw/main/DeepLopener.zip
-
-- Drag-and-drop `DeepLopener.zip` to `chrome://extensions`.
+https://chrome.google.com/webstore/detail/deepl-opener/almdndhiblbhbnoaakhgefcpmbaoljde
 
 # Cautions
 
 - To use this extension, please sign in to Chrome and sync turns on. If you do not sign in or sync turns off, you will get an error like  
   `Error in response to storage.get: Error: Invocation of form identity.getProfileUserInfo(null, function) doesn't match definition identity.getProfileUserInfo(function callback)`.  
-  ![syncon.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/images/syncon.png)
+  ![syncon.png](https://github.com/T3aHat/DeepLopener/raw/main/images/syncon.png)
 - Can't use PDF mode on local PDF files?  
   Ensure that the "Allow access to file URLs" is checked on options page of this extension like below.
-  ![allowAccessToFileURL.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/images/allowAccessToFileURL.png)
+  ![allowAccessToFileURL.png](https://github.com/T3aHat/DeepLopener/raw/main/images/allowAccessToFileURL.png)
 
 # Usage
 
 **(1)** 【transition mode】  
 Right click on the text you want to translate → Click on `DeepL:selected_text`.  
 **(2)** 【layout-oriented replacement mode】  
-Click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/icon24.png) in the right-hand corner and
+Click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the right-hand corner and
 move the cursor and right-click to select the text you want to translate or click to cancel to select.  
 **(3)** 【text-oriented replacement mode】  
-With the text to be translated selected, press `Ctrl+X` (`Command+X` on mac) twice within 1 second or click on the icon ![icno24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/icon24.png) that appears after selecting the text.  
+With the text to be translated selected, press `Ctrl+X` (`⌘+X` on mac) twice within 1 second or click on the icon ![icno24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) that appears after selecting the text.  
 **(4)** 【PDF mode】  
 On PDF, select the text you want to translate and right-click on the text and click on `DeepL:selected_text`.
 
 **(1)【transition mode】**  
-![openDeepL.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/openDeepL.gif)  
+![openDeepL.gif](https://github.com/T3aHat/DeepLopener/blob/main/images/openDeepL.gif)  
 Move to https://www.deepl.com/translator#ja/en/selected_text
 
 **(2)【layout-oriented replacement mode】**  
-![layout-oriented.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/layout-oriented.gif)  
+![layout-oriented.gif](https://github.com/T3aHat/DeepLopener/blob/main/images/layout-oriented.gif)  
 The selected frame will be translated on layout-oriented replacement mode keeping the original style.  
-If you click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/icon24.png) in the right-hand corner and
+If you click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the right-hand corner and
 select `Translate this page!`, the whole page contents will be translated like below.  
-![pagetrans.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/pagetrans.gif)
+![pagetrans.gif](https://github.com/T3aHat/DeepLopener/blob/main/images/pagetrans.gif)
 
 **(3)【text-oriented replacement mode】**  
-![text-oriented.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/text-oriented.gif)  
+![text-oriented.gif](https://github.com/T3aHat/DeepLopener/blob/main/images/text-oriented.gif)  
 The selected text is highlighted in red first. After traslation , it turns yellow.  
 Right-click on the translation to display the original text.If you do it again, the letters will be toggled back to translation.  
 It is recommended to use this mode separately from the layout-oriented replacement mode because the original layout will be destroyed.
 
 **(4)【PDF mode】**  
-![pdfmode.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/pdfmode.gif)  
+![pdfmode.gif](https://github.com/T3aHat/DeepLopener/blob/main/images/pdfmode.gif)  
 For sites whose MIME type is `application/pdf` (local PDF files available!), the `transition mode` changes to `PDF mode` and the other modes are disabled.  
 You can move the translation frame around freely in Drag-and-Drop, and right-clicking on the translation result frame will remove it.
 
 # Options
 
 You can change the language of the translated text by changing this setting.  
-To change the setting, please right click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/icon24.png) in the right-hand corner and select `Options`.  
+To change the setting, please right click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the right-hand corner and select `Options`.  
 (Default: Target : `English(American)`)  
-![open_options.png](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/open_options.png)  
-![options.png](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/options.png)  
+![open_options.png](https://github.com/T3aHat/DeepLopener/blob/main/images/open_options.png)  
+![options.png](https://github.com/T3aHat/DeepLopener/blob/main/images/options.png)  
 **Translation icon**  
-When "Enable", ![icon24.png](https://github.com/T3aHat/DeepLopener_PRO/raw/main/icon24.png) will be displayed on the web page.  
+When "Enable", ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) will be displayed on the web page.  
 (Default:`"Enable"`)
 
 **HoverText**  
-![hover2.gif](https://github.com/T3aHat/DeepLopener_PRO/blob/main/images/hover.gif)  
+![hover2.gif](https://github.com/T3aHat/DeepLopener/blob/main/images/hover.gif)  
 When "Enable", the original text is displayed under the translation (and vice versa) on text-oriented replacement mode.  
 (Default:`"Enable"`)
 

@@ -3,7 +3,6 @@ function winclose() {
   window.close();
 }
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  let url = tabs[0].url;
   chrome.tabs.sendMessage(tabs[0].id, { message: "ispdf" }, function (res) {
     if (chrome.runtime.lastError) {
     }
@@ -12,8 +11,6 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     } else {
       ispdf = false;
     }
-    document.querySelector(".icon").innerHTML =
-      "<img src=" + '"' + chrome.runtime.getURL("icon24.png") + '">';
     if (ispdf) {
       document.querySelector("#pagetrans").remove();
     } else {
@@ -92,4 +89,5 @@ function change() {
 }
 
 document.querySelector("#target").addEventListener("change", change);
+document.querySelector("#close").addEventListener("click", winclose);
 document.addEventListener("DOMContentLoaded", restore_options);

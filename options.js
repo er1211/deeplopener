@@ -74,6 +74,14 @@ function save_options() {
 }
 
 function restore_options() {
+  document.querySelectorAll(".descparent").forEach((descpar) => {
+    descpar.querySelector("select").addEventListener("mouseover", function () {
+      descpar.querySelector(".description").style.display = "inline-block";
+    });
+    descpar.querySelector("select").addEventListener("mouseleave", function () {
+      descpar.querySelector(".description").style.display = "none";
+    });
+  });
   chrome.storage.sync.get(
     {
       target: "EN-US",
@@ -298,12 +306,6 @@ function api_test() {
   });
 }
 
-document.querySelector(".icon").innerHTML =
-  '<p>Translation icon: (When "Enable", translation icon <img src=' +
-  '"' +
-  chrome.runtime.getURL("icon24.png") +
-  '"' +
-  "> is displayed.)";
 document.addEventListener("DOMContentLoaded", restore_options);
 document.querySelector("#save").addEventListener("click", save_options);
 document.querySelector("#apitest").addEventListener("click", api_test);
