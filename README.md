@@ -54,8 +54,9 @@ For sites whose MIME type is `application/pdf` (local PDF files available!), the
 You can move the translation frame around freely in Drag-and-Drop, and right-clicking on the translation result frame will remove it.
 
 **Usage**  
-The Characters translated so far in the current billing period are displayed in the upper right icon.  
- ![usage.png](https://github.com/T3aHat/DeepLopener/raw/main/images/usage.png)_I translated 11% (55000/500000) characters in the current billing period with DeepL API Free._
+The number of characters translated so far in the current billing period is displayed in the upper right icon.  
+ ![usage.png](https://github.com/T3aHat/DeepLopener/raw/main/images/usage.png)  
+ _I translated 11% (55000/500000) characters in the current billing period with DeepL API Free._
 
 # Options
 
