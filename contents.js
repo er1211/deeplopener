@@ -340,6 +340,46 @@ function pdfMode(translation, translationid) {
   });
 }
 
+function updateBadgeText(freeflag) {
+  let url;
+  if (freeflag == "Free") {
+    url = "https://api-free.deepl.com/v2/usage";
+  } else {
+    url = "https://api.deepl.com/v2/usage";
+  }
+  let params = {
+    auth_key: api_key,
+  };
+  let data = new URLSearchParams();
+  Object.keys(params).forEach((key) => data.append(key, params[key]));
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded; utf-8",
+    },
+    body: data,
+  }).then((res) => {
+    res.json().then((resData) => {
+      let percent = Math.trunc(
+        (resData.character_count / resData.character_limit) * 100
+      );
+      console.log(
+        resData.character_count +
+          "/" +
+          resData.character_limit +
+          " characters translated so far in the current billing period.\n"
+      );
+      chrome.runtime.sendMessage(
+        { message: "updateBadgeText", text: percent },
+        function (res) {
+          if (chrome.runtime.lastError) {
+          }
+        }
+      );
+    });
+  });
+}
+
 function apiTranslate(iselm, elm, mode, selectionid, translationid) {
   let targetHtml;
   if (iselm) {
@@ -393,6 +433,7 @@ function apiTranslate(iselm, elm, mode, selectionid, translationid) {
             pdfMode(translation, translationid);
           }
         });
+        updateBadgeText(freeflag);
       } else {
         elm.innerHTML =
           "This is a sample of the translation result from DeepLopener .";
@@ -425,6 +466,13 @@ function apiTranslate(iselm, elm, mode, selectionid, translationid) {
                 "\nThe request size exceeds the limit."
             );
             break;
+          case 414:
+            alert(
+              "DeepLopener Error : " +
+                res.status +
+                "\nThe request URL is too long."
+            );
+            break;
           case 429:
             alert(
               "DeepLopener Error : " +
@@ -444,6 +492,13 @@ function apiTranslate(iselm, elm, mode, selectionid, translationid) {
               "DeepLopener Error : " +
                 res.status +
                 "\nResource currently unavailable. Try again later."
+            );
+            break;
+          case 529:
+            alert(
+              "DeepLopener Error : " +
+                res.status +
+                "\nToo many requests. Please wait and resend your request."
             );
             break;
           default:

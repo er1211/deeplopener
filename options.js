@@ -275,6 +275,12 @@ function api_test() {
                       res.status +
                       "\nThe request size exceeds the limit.";
                     break;
+                  case 414:
+                    document.querySelector("#apitestm").innerText =
+                      "Error : " +
+                      res.status +
+                      "\nThe request URL is too long.";
+                    break;
                   case 429:
                     document.querySelector("#apitestm").innerText =
                       "Error : " +
@@ -292,6 +298,12 @@ function api_test() {
                       "Error : " +
                       res.status +
                       "\nResource currently unavailable. Try again later.";
+                    break;
+                  case 529:
+                    document.querySelector("#apitestm").innerText =
+                      "Error : " +
+                      res.status +
+                      "\nToo many requests. Please wait and resend your request.";
                     break;
                   default:
                     document.querySelector("#apitestm").innerText =

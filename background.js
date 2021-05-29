@@ -75,6 +75,8 @@ function transition() {
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message == "pleaseApiKey") {
     get_apikey(sender.tab.id);
+  } else if (request.message == "updateBadgeText") {
+    chrome.browserAction.setBadgeText({ text: request.text + "%" });
   }
 });
 

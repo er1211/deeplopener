@@ -19,7 +19,7 @@ https://chrome.google.com/webstore/detail/deepl-opener/almdndhiblbhbnoaakhgefcpm
   Ensure that the "Allow access to file URLs" is checked on options page of this extension like below.
   ![allowAccessToFileURL.png](https://github.com/T3aHat/DeepLopener/raw/main/images/allowAccessToFileURL.png)
 
-# Usage
+# How to use
 
 **(1)** 【transition mode】  
 Right click on the text you want to translate → Click on `DeepL:selected_text`.  
@@ -52,6 +52,10 @@ It is recommended to use this mode separately from the layout-oriented replaceme
 ![pdfmode.gif](https://github.com/T3aHat/DeepLopener/blob/main/images/pdfmode.gif)  
 For sites whose MIME type is `application/pdf` (local PDF files available!), the `transition mode` changes to `PDF mode` and the other modes are disabled.  
 You can move the translation frame around freely in Drag-and-Drop, and right-clicking on the translation result frame will remove it.
+
+**Usage**  
+The Characters translated so far in the current billing period are displayed in the upper right icon.  
+ ![usage.png](https://github.com/T3aHat/DeepLopener/raw/main/images/usage.png)_I translated 11% (55000/500000) characters in the current billing period._
 
 # Options
 
