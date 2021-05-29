@@ -55,7 +55,7 @@ You can move the translation frame around freely in Drag-and-Drop, and right-cli
 
 **Usage**  
 The Characters translated so far in the current billing period are displayed in the upper right icon.  
- ![usage.png](https://github.com/T3aHat/DeepLopener/raw/main/images/usage.png)_I translated 11% (55000/500000) characters in the current billing period._
+ ![usage.png](https://github.com/T3aHat/DeepLopener/raw/main/images/usage.png)_I translated 11% (55000/500000) characters in the current billing period with DeepL API Free._
 
 # Options
 
