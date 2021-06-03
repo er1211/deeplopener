@@ -84,5 +84,5 @@ Please check the version of the API you are using and configure it appropriately
   意図しない挙動を起こしても一切責任を負いません．  
   DeepL API を契約する際に**API 使用額上限を低めに設定**することを強く推奨します．
 - 脆弱性により API の秘密鍵等が流出する可能性があります． **使用する場合はリスクを考慮したうえで自己責任で使用してください．ソースコードの挙動を理解できない場合は使用しないでください．** 開発者は一切責任を負いません．
-- 定期的に身に覚えのない API 使用履歴がないか[ご利用状況](https://www.deepl.com/pro-account.html?page=category_usage)を確認してください(月一で確認を促す警告が表示されます)．
+- 定期的に身に覚えのない API 使用履歴がないか[ご利用状況](https://www.deepl.com/pro-account.html?page=category_usage)を確認してください．
 - 開発者はド素人なので，特に API 鍵の保存方法に関するアドバイスを頂けると幸いです．

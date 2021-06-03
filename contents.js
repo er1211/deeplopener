@@ -1,4 +1,4 @@
-console.log("DeepLopener loaded");
+console.log("DeepLopener: loaded");
 chrome.runtime.sendMessage({ message: "pleaseApiKey" }, function (res) {
   if (chrome.runtime.lastError) {
   }
@@ -214,8 +214,7 @@ function textOrientedMode(txtlist, resData, selectionid) {
     let txt = txtlist[i];
     let trid = translationId;
     console.log(
-      translationId +
-        " Original:\n" +
+      " Original:\n" +
         txt +
         "\n\nTranslation results for DeepL (deepl.com) API:\n" +
         translation
@@ -364,10 +363,11 @@ function updateBadgeText(freeflag) {
         (resData.character_count / resData.character_limit) * 100
       );
       console.log(
-        resData.character_count +
+        "DeepLopener: " +
+          resData.character_count +
           "/" +
           resData.character_limit +
-          " characters translated so far in the current billing period.\n"
+          " characters translated.\n"
       );
       chrome.runtime.sendMessage(
         { message: "updateBadgeText", text: percent },
