@@ -1,0 +1,28 @@
+body {
+  user-select: none;
+  align-items: center;
+}
+div {
+  display: flex;
+  justify-content: center;
+}
+input {
+  margin-left: 10px;
+}
+select {
+  margin-left: 5px;
+  cursor: pointer;
+}
+button {
+  cursor: pointer;
+}
+
+#message {
+  margin-bottom: 25px;
+}
+#title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}

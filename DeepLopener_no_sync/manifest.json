@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "DeepL opener no sync",
+  "version": "0.0.1",
+  "permissions": ["storage","identity","identity.email", "contextMenus"],
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "icons": { "128": "icon128.png" },
+  "web_accessible_resources": ["icon24.png"],
+  "options_ui":{
+    "page":"options.html",
+    "chrome_style":true
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "run_at": "document_start"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["jquery-3.5.1.min.js", "jquery-ui.js", "contents.js"],
+      "css": ["style.css", "jquery-ui.css"],
+      "run_at": "document_start"
+    }
+  ]
+}

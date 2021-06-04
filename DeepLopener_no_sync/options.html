@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DeepLopener Options Page</title>
+        <meta http-equiv="content-type" charset="utf-8"> 
+        <link rel="stylesheet" href="options.css">
+    </head>
+
+    <body>
+        <div style="text-align: center;">
+            <a href="https://youtu.be/YlKi-NVJV-E" target="_blank">How to use (YouTube)</a>
+            <a href="https://github.com/T3aHat/DeepLopener#%E5%85%8D%E8%B2%AC%E4%BA%8B%E9%A0%85disclaimer" target="_blank">Disclaimer</a>
+        </div>
+　  <div class="setting">
+        <span class="settingm">
+            Target language:
+        </span>
+        <div class="descparent">        
+            <select class="descchild" id="target">
+            <option value="EN-US">English(American)</option>
+            <option value="EN-GB">English(British)</option>
+            <option value="JA">日本語</option>
+            <option value="BG">Bulgarian</option>
+            <option value="ZH">Chinese</option>
+            <option value="CS">Czech</option>
+            <option value="DA">Danish</option>
+            <option value="NL">Dutch</option>
+            <option value="ET">Estonian</option>
+            <option value="FI">Finnish</option>
+            <option value="FR">French</option>
+            <option value="DE">German</option>
+            <option value="EL">Greek</option>
+            <option value="HU">Hungarian</option>
+            <option value="IT">Italian</option>          
+            <option value="LV">Latvian</option>
+            <option value="LT">Lithuanian</option>
+            <option value="PL">Polish</option>
+            <option value="PT-PT">Portuguese</option>
+            <option value="PT-BR">Portuguese(Brazilian)</option>
+            <option value="RO">Romanian</option>
+            <option value="RU">Russian</option>
+            <option value="SK">Slovak</option>
+            <option value="SL">Slovenian</option>
+            <option value="ES">Spanish</option>
+            <option value="SV">Swedish</option>
+            </select>
+            <div class="description">The text will be translated into this language.</div>
+        </div>
+　  </div>
+    
+    <div class="icon setting">
+        <span class="settingm">
+            Translation icon:
+        </span>       
+        <div class="descparent">
+            <select class="descchild" id="iconflag">
+                <option value="Enable">Enable</option>
+                <option value="Disable">Disable</option>
+            </select>
+            <div class="description">When "Enable", the translation icon <img src="../icon24.png"/> will be displayed on the web page.</div>
+        </div>
+    </div>
+    
+    <div class="hover setting">
+        <span class="settingm">
+            HoverText:
+        </span>
+        <div class="descparent">
+            <select class="descchild" id="hoverflag">
+                <option value="Enable">Enable</option>
+                <option value="Disable">Disable</option>
+            </select>
+            <div class="description">When "Enable", the original text will be displayed under the translation result (and vice versa) on text-oriented replacement mode.</div>
+        </div>
+    </div>
+    <div class="pass setting">
+        <span class="settingm">
+            Password:
+        </span>
+        <div class="descparent">
+            <input type="password" class="descchild" id="decpass" style="height: 1rem;  margin-left: 5px;">
+            <div class="description">If you log in to chrome and enable synchronization, you won't need to enter your password every time.
+            </div>
+        </div>
+    </div>
+    <div class="setting">
+            <span class="settingm">
+                <a href="https://www.deepl.com/pro#developer" target="_blank">DeepL API_KEY:</a>
+            </span>
+            <span class="free">
+                <select id="freeflag">
+                    <option value="Free">Free</option>
+                    <option value="Pro">Pro</option>
+                </select>
+            </span>  
+            <input type="password" id="deeplpro_apikey" style="height: 1rem;">
+            <button id="apitest">Test</button>
+    </div>
+
+    <div id="apitestm"></div>        
+
+
+    <div style="display: flex; justify-content: center;padding-top: 10px;">
+        <button id="save">Save</button>
+    </div>
+    <div id="incogm"></div>
+    <div id="message" ></div>
+
+    <script type="text/javascript" src="sha512.js"></script>
+    <script src="options.js"></script>
+    </body>
+</html>

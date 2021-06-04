@@ -70,7 +70,7 @@ function get_apikey(tabid) {
     chrome.identity.getProfileUserInfo(null, function (info) {
       if (info.id == "" || info.email == "") {
         alert(
-          "To use this extension, please sign in to chrome and sync turns on."
+          "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's github repository."
         );
       } else {
         tmp = 0;

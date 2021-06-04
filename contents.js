@@ -1,8 +1,5 @@
 console.log("DeepLopener: loaded");
-chrome.runtime.sendMessage({ message: "pleaseApiKey" }, function (res) {
-  if (chrome.runtime.lastError) {
-  }
-});
+
 let ispdf;
 if (document.contentType === "application/pdf") {
   ispdf = true;
@@ -13,6 +10,8 @@ let api_key;
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message == "got_apikey") {
     api_key = request.api_key;
+    apiTranslate(tmplist[0], tmplist[1], tmplist[2], tmplist[3], tmplist[4]);
+    tmplist = []; //flush
     sendResponse();
   } else if (request.message == "page_translate") {
     $(document).off("mousemove");
@@ -380,132 +379,141 @@ function updateBadgeText(freeflag) {
   });
 }
 
+let tmplist = [];
 function apiTranslate(iselm, elm, mode, selectionid, translationid) {
-  let targetHtml;
-  if (iselm) {
-    targetHtml = elm.innerHTML;
-  } else {
-    targetHtml = elm;
-  }
-  chrome.storage.sync.get(null, function (items) {
-    let target = items.target;
-    let freeflag = items.freeflag;
-    if (typeof target === "undefined") {
-      target = "EN-US";
-    }
-    let api_url;
-    if (freeflag == "Free") {
-      api_url = "https://api-free.deepl.com/v2/translate";
-    } else {
-      api_url = "https://api.deepl.com/v2/translate";
-    }
-    let params = {
-      auth_key: api_key,
-      target_lang: target,
-      tag_handling: "xml",
-    };
-    if (mode != "textOrientedMode") {
-      params.text = targetHtml;
-      translationId++;
-    }
-    let data = new URLSearchParams();
-    Object.keys(params).forEach((key) => data.append(key, params[key]));
-    if (mode == "textOrientedMode") {
-      elm.forEach((text) => {
-        data.append("text", text);
-      });
-    }
-    fetch(api_url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; utf-8",
-      },
-      body: data,
-    }).then((res) => {
-      if (res.status == "200") {
-        res.json().then((resData) => {
-          let translation = resData.translations[0].text;
-          if (mode == "layoutOrientedMode") {
-            elm.innerHTML = translation;
-          } else if (mode == "textOrientedMode") {
-            textOrientedMode(elm, resData, selectionid);
-          } else if (mode == "pdfMode") {
-            pdfMode(translation, translationid);
-          }
-        });
-        updateBadgeText(freeflag);
-      } else {
-        elm.innerHTML =
-          "This is a sample of the translation result from DeepLopener .";
-        switch (res.status) {
-          case 400:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nBad request. Please check error message and your parameters."
-            );
-            break;
-          case 403:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nAuthorization failed. Please supply a valid auth_key parameter."
-            );
-            break;
-          case 404:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nThe requested resource could not be found."
-            );
-            break;
-          case 413:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nThe request size exceeds the limit."
-            );
-            break;
-          case 414:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nThe request URL is too long."
-            );
-            break;
-          case 429:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nToo many requests. Please wait and resend your request."
-            );
-            break;
-          case 456:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nQuota exceeded. The character limit has been reached."
-            );
-            break;
-          case 503:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nResource currently unavailable. Try again later."
-            );
-            break;
-          case 529:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nToo many requests. Please wait and resend your request."
-            );
-            break;
-          default:
-            alert("DeepLopener Error : " + res.status);
-        }
+  if (api_key === undefined) {
+    tmplist = [iselm, elm, mode, selectionid, translationid];
+    chrome.runtime.sendMessage({ message: "pleaseApiKey" }, function (res) {
+      if (chrome.runtime.lastError) {
       }
-      window.getSelection().removeAllRanges();
     });
-  });
+  } else {
+    let targetHtml;
+    if (iselm) {
+      targetHtml = elm.innerHTML;
+    } else {
+      targetHtml = elm;
+    }
+    chrome.storage.sync.get(null, function (items) {
+      let target = items.target;
+      let freeflag = items.freeflag;
+      if (typeof target === "undefined") {
+        target = "EN-US";
+      }
+      let api_url;
+      if (freeflag == "Free") {
+        api_url = "https://api-free.deepl.com/v2/translate";
+      } else {
+        api_url = "https://api.deepl.com/v2/translate";
+      }
+      let params = {
+        auth_key: api_key,
+        target_lang: target,
+        tag_handling: "xml",
+      };
+      if (mode != "textOrientedMode") {
+        params.text = targetHtml;
+        translationId++;
+      }
+      let data = new URLSearchParams();
+      Object.keys(params).forEach((key) => data.append(key, params[key]));
+      if (mode == "textOrientedMode") {
+        elm.forEach((text) => {
+          data.append("text", text);
+        });
+      }
+      fetch(api_url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; utf-8",
+        },
+        body: data,
+      }).then((res) => {
+        if (res.status == "200") {
+          res.json().then((resData) => {
+            let translation = resData.translations[0].text;
+            if (mode == "layoutOrientedMode") {
+              elm.innerHTML = translation;
+            } else if (mode == "textOrientedMode") {
+              textOrientedMode(elm, resData, selectionid);
+            } else if (mode == "pdfMode") {
+              pdfMode(translation, translationid);
+            }
+          });
+          updateBadgeText(freeflag);
+        } else {
+          elm.innerHTML =
+            "This is a sample of the translation result from DeepLopener .";
+          switch (res.status) {
+            case 400:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nBad request. Please check error message and your parameters."
+              );
+              break;
+            case 403:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nAuthorization failed. Please supply a valid auth_key parameter."
+              );
+              break;
+            case 404:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nThe requested resource could not be found."
+              );
+              break;
+            case 413:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nThe request size exceeds the limit."
+              );
+              break;
+            case 414:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nThe request URL is too long."
+              );
+              break;
+            case 429:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nToo many requests. Please wait and resend your request."
+              );
+              break;
+            case 456:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nQuota exceeded. The character limit has been reached."
+              );
+              break;
+            case 503:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nResource currently unavailable. Try again later."
+              );
+              break;
+            case 529:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nToo many requests. Please wait and resend your request."
+              );
+              break;
+            default:
+              alert("DeepLopener Error : " + res.status);
+          }
+        }
+        window.getSelection().removeAllRanges();
+      });
+    });
+  }
 }

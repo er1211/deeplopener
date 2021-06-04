@@ -6,7 +6,7 @@ function save_options() {
     if (info.id == "" || info.email == "") {
       document.querySelector("#apitestm").style.color = "red";
       document.querySelector("#apitestm").innerText =
-        "To use this extension, please sign in to chrome and sync turns on.";
+        "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's github repository.";
     } else {
       let tmp = 0;
       let tmp2 = 1;
@@ -95,7 +95,7 @@ function restore_options() {
         if (info.id == "" || info.email == "") {
           document.querySelector("#apitestm").style.color = "red";
           document.querySelector("#apitestm").innerText =
-            "To use this extension, please sign in to chrome and sync turns on.";
+            "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's github repository.";
         } else {
           let tmp = 0;
           let tmp2 = 1;
@@ -152,7 +152,7 @@ function api_test() {
     if (info.id == "" || info.email == "") {
       document.querySelector("#apitestm").style.color = "red";
       document.querySelector("#apitestm").innerText =
-        "To use this extension, please sign in to chrome and sync turns on.";
+        "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's github repository.";
     } else {
       let tmp = 0;
       let tmp2 = 1;
