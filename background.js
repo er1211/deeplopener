@@ -1,5 +1,15 @@
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason == "install") {
+    chrome.storage.sync.set(
+      {
+        target: "EN-US",
+        iconflag: "Enable",
+        hoverflag: "Enable",
+        freeflag: "Free",
+        deeplpro_apikey: [],
+      },
+      function () {}
+    );
     alert(
       'Thank you for installing DeepLopener!\nBefore using this extension, please input "DeepL API_KEY" on options page.'
     );
@@ -70,7 +80,7 @@ function get_apikey(tabid) {
     chrome.identity.getProfileUserInfo(null, function (info) {
       if (info.id == "" || info.email == "") {
         alert(
-          "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's github repository."
+          "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's GitHub repository."
         );
       } else {
         tmp = 0;

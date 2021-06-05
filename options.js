@@ -5,8 +5,7 @@ function save_options() {
   chrome.identity.getProfileUserInfo(null, function (info) {
     if (info.id == "" || info.email == "") {
       document.querySelector("#apitestm").style.color = "red";
-      document.querySelector("#apitestm").innerText =
-        "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's github repository.";
+      document.querySelector("#apitestm").innerHTML = errHTML;
     } else {
       let tmp = 0;
       let tmp2 = 1;
@@ -94,8 +93,7 @@ function restore_options() {
       chrome.identity.getProfileUserInfo(null, function (info) {
         if (info.id == "" || info.email == "") {
           document.querySelector("#apitestm").style.color = "red";
-          document.querySelector("#apitestm").innerText =
-            "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's github repository.";
+          document.querySelector("#apitestm").innerHTML = errHTML;
         } else {
           let tmp = 0;
           let tmp2 = 1;
@@ -151,8 +149,7 @@ function api_test() {
   chrome.identity.getProfileUserInfo(null, function (info) {
     if (info.id == "" || info.email == "") {
       document.querySelector("#apitestm").style.color = "red";
-      document.querySelector("#apitestm").innerText =
-        "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's github repository.";
+      document.querySelector("#apitestm").innerHTML = errHTML;
     } else {
       let tmp = 0;
       let tmp2 = 1;
@@ -318,6 +315,8 @@ function api_test() {
   });
 }
 
+const errHTML =
+  "To use this extension, please sign in to chrome and sync turns on.<br>If you are interested in another version that can be used without chrome synchronization, please check <a href='https://github.com/T3aHat/DeepLopener' target='_blank'>DeepLopener's GitHub repository</a>.";
 document.addEventListener("DOMContentLoaded", restore_options);
 document.querySelector("#save").addEventListener("click", save_options);
 document.querySelector("#apitest").addEventListener("click", api_test);
