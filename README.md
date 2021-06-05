@@ -51,9 +51,13 @@ The Characters translated so far in the current billing period are displayed in 
 
 You can change the language of the translated text by changing this setting.  
 To change the setting, please right click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the right-hand corner and select `Options`.  
-(Default: Target : `English(American)`)  
 ![open_options.png](https://github.com/T3aHat/DeepLopener/blob/main/images/open_options.png)  
-![options.png](https://github.com/T3aHat/DeepLopener/blob/main/images/options.png)  
+![options.png](https://github.com/T3aHat/DeepLopener/blob/main/images/options.png)
+
+**Target language**
+The text will be translated into this language.  
+(Default: Target : `English(American)`)
+
 **Translation icon**  
 When "Enable", ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) will be displayed on the web page.  
 (Default:`"Enable"`)
