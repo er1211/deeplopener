@@ -5,6 +5,7 @@ body {
 div {
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 input {
   margin-left: 10px;
@@ -25,4 +26,7 @@ button {
   align-items: center;
   justify-content: center;
   font-weight: 600;
+}
+#errmsg {
+  color: red;
 }

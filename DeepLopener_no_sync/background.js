@@ -1,5 +1,15 @@
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason == "install") {
+    chrome.storage.sync.set(
+      {
+        target: "EN-US",
+        iconflag: "Enable",
+        hoverflag: "Enable",
+        freeflag: "Free",
+        deeplpro_apikey: [],
+      },
+      function () {}
+    );
     alert(
       'Thank you for installing DeepLopener!\nBefore using this extension, please input "DeepL API_KEY" on options page.'
     );
@@ -55,7 +65,7 @@ function transition() {
     });
   };
 }
-
+let errmsg;
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message == "pleaseApiKey") {
     get_apikey(sender.tab.id);
@@ -63,13 +73,29 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     chrome.browserAction.setBadgeText({ text: request.text + "%" });
   } else if (request.message == "send") {
     dec(request.pass1, request.pass2, senderTabId);
+  } else if (request.message == "failed") {
+    errmsg = request.errmsg;
+    updateApiKey(sender.tab.id, request.errmsg);
+  } else if (request.message == "pleaseErrMsg") {
+    if (errmsg == undefined) {
+      errmsg = "";
+    }
+    chrome.tabs.sendMessage(
+      sender.tab.id,
+      { message: "errmsg", errmsg: errmsg },
+      function (res) {
+        if (chrome.runtime.lastError) {
+        }
+      }
+    );
   }
+
   sendResponse();
 });
 
 let api_key = "";
 let senderTabId = "";
-function get_apikey(tabid) {
+function get_apikey(tabid, errmsg) {
   if (api_key != "") {
     chrome.tabs.sendMessage(
       tabid,
@@ -87,7 +113,7 @@ function get_apikey(tabid) {
           url: "../input.html",
           type: "popup",
           width: 450,
-          height: 200,
+          height: 220,
           focused: true,
         });
       } else {
@@ -95,6 +121,22 @@ function get_apikey(tabid) {
       }
     });
   }
+}
+
+function updateApiKey(tabid) {
+  chrome.identity.getProfileUserInfo(null, function (info) {
+    if (info.id == "" || info.email == "") {
+      senderTabId = tabid;
+      chrome.windows.create({
+        url: "../input.html",
+        type: "popup",
+        width: 450,
+        height: 220,
+        focused: true,
+      });
+    } else {
+    }
+  });
 }
 
 function dec(t1, t2, tabid) {

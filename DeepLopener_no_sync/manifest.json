@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name": "DeepL opener no sync",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "permissions": ["storage","identity","identity.email", "contextMenus"],
-  "description": "__MSG_appDesc__",
+  "description": "Display translation results on PDFs and translate pages using the DeepL API (Unofficial).Based on DeepLopener ver.1.1.5",
   "default_locale": "en",
   "icons": { "128": "icon128.png" },
   "web_accessible_resources": ["icon24.png"],

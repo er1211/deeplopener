@@ -1,3 +1,7 @@
+chrome.runtime.sendMessage({ message: "pleaseErrMsg" }, function (res) {
+  if (chrome.runtime.lastError) {
+  }
+});
 function send() {
   const obj = new jsSHA("SHA-512", "TEXT");
   obj.update(document.querySelector("#pass").value);
@@ -18,6 +22,11 @@ function enter(e) {
   }
   return false;
 }
-
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.message == "errmsg") {
+    document.querySelector("#errmsg").innerText = request.errmsg;
+    sendResponse();
+  }
+});
 document.querySelector("#enter").addEventListener("click", send);
 document.querySelector("#pass").addEventListener("keypress", enter);

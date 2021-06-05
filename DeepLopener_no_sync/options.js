@@ -24,7 +24,7 @@ function save_options() {
     if (!overlength && restoredflag) {
       document.querySelector("#apitestm").style.color = "red";
       document.querySelector("#apitestm").innerText =
-        "Password must be 10 or more characters.";
+        "Password must be 6 or more characters.";
     } else {
       let tmp = 0;
       let tmp2 = 1;

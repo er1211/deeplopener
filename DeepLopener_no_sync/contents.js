@@ -442,8 +442,6 @@ function apiTranslate(iselm, elm, mode, selectionid, translationid) {
           });
           updateBadgeText(freeflag);
         } else {
-          elm.innerHTML =
-            "This is a sample of the translation result from DeepLopener .";
           switch (res.status) {
             case 400:
               alert(
@@ -453,10 +451,16 @@ function apiTranslate(iselm, elm, mode, selectionid, translationid) {
               );
               break;
             case 403:
-              alert(
+              let errmsg =
                 "DeepLopener Error : " +
-                  res.status +
-                  "\nAuthorization failed. Please supply a valid auth_key parameter."
+                res.status +
+                "\nAuthorization failed. Please supply a valid auth_key parameter.";
+              chrome.runtime.sendMessage(
+                { message: "failed", errmsg: errmsg },
+                function (res) {
+                  if (chrome.runtime.lastError) {
+                  }
+                }
               );
               break;
             case 404:
