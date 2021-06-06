@@ -71,6 +71,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     get_apikey(sender.tab.id);
   } else if (request.message == "updateBadgeText") {
     chrome.browserAction.setBadgeText({ text: request.text + "%" });
+  } else if (request.message == "injectJQueryUI") {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.insertCSS(sender.tab.id, { file: "jquery-ui.css" });
+      chrome.tabs.executeScript(sender.tab.id, { file: "jquery-ui.js" });
+      sendResponse();
+    });
   }
 });
 

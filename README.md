@@ -3,7 +3,7 @@
 [日本語解説記事](https://t3ahat.hateblo.jp/entry/How_to_use_DeepLopener)に日本語で詳しくインストール方法や使用方法を書いているので[こちら](https://t3ahat.hateblo.jp/entry/How_to_use_DeepLopener)を読んでください．  
 [How to use (YouTube) ](https://youtu.be/YlKi-NVJV-E)
 
-You can launch DeepL (https://www.deepl.com) through this Google chrome extension and replace the texts that you want to translate with translation results keepking the original style.  
+This Google chrome extension enable to replace the texts that you want to translate with translation results by DeepL(deepl.com) keepking the original style.  
 On pdf, this extension displays a frame showing translated sentences.
 
 # Install from Chrome Web Store

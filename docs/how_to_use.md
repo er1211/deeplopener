@@ -12,13 +12,13 @@
 
 3.  Login to Chrome and enable synchronization.  
     ![syncon.png](https://github.com/T3aHat/DeepLopener/raw/main/images/syncon.png)  
-    You need Login to Chrome and enable synchronization for security reasons.
+    You need to login to Chrome and enable synchronization for security reasons.
     If you don’t want to log in to Chrome and sync, see [here](http://teahat.ml/DeepLopener/#chrome-sync).
 
-4.  Input your API_KEY and change a version setting on options page.  
+4.  Input your API_KEY and change a setting of API version on options page.  
     ![options.png](https://github.com/T3aHat/DeepLopener/raw/main/images/options.png)
-    - If you want to use Free version, change a setting as `Free`.
-    - If you want to use Pro version, change a setting as `Pro`.
+    - If you want to use Free version, change it as `Free`.
+    - If you want to use Pro version, change it as `Pro`.
 
 # layout-oriented replacement mode
 
