@@ -10,6 +10,10 @@ On pdf, this extension displays a frame showing translated sentences.
 
 https://chrome.google.com/webstore/detail/deepl-opener/almdndhiblbhbnoaakhgefcpmbaoljde
 
+# Web site of this extension
+
+https://teahat.ml/DeepLopener/
+
 # How to use
 
 **(1)【layout-oriented replacement mode】**  
@@ -26,10 +30,6 @@ On PDF, select the text you want to translate and right-click on the text and cl
 ![pdfmode.gif](https://github.com/T3aHat/DeepLopener/blob/main/images/pdfmode.gif)  
 For sites whose MIME type is `application/pdf` (local PDF files available!), the `transition mode` changes to `PDF mode` and the other modes are disabled.  
 You can move the translation frame around freely in Drag-and-Drop, and right-clicking on the translation result frame will remove it.
-
-- Can't use PDF mode on local PDF files?  
-  Ensure that the "Allow access to file URLs" is checked on options page of this extension like below.
-  ![allowAccessToFileURL.png](https://github.com/T3aHat/DeepLopener/raw/main/images/allowAccessToFileURL.png)
 
 **(3)【text-oriented replacement mode】**  
 With the text to be translated selected, press `Ctrl+X` (`⌘+X` on mac) twice within 1 second or click on the icon ![icno24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) that appears after selecting the text.  
@@ -77,6 +77,16 @@ Please check the version of the API you are using and configure it appropriately
   `Error in response to storage.get: Error: Invocation of form identity.getProfileUserInfo(null, function) doesn't match definition identity.getProfileUserInfo(function callback)`.  
   ![syncon.png](https://github.com/T3aHat/DeepLopener/raw/main/images/syncon.png)
 - Don't want to log in to Chrome and sync? If so, there is an another [version](https://github.com/T3aHat/DeepLopener/tree/main/DeepLopener_no_sync) that asks for a password every time you translate for the first time after launching chrome instead of synchronization (but deprecated).
+
+# Q&A
+
+- I can't use page translation.  
+  →There are two main possibilities. The first is that the size of the page you want to translate is larger than 30kbytes. The second is CORS. In either case, please use the layout-oriented replacement mode instead. Please read the error codes in the Developer Tools for more information.
+
+- I can't use PDF mode on local PDF files.  
+   Ensure that the "Allow access to file URLs" is checked on options page of this extension like below.  
+   Improper settings may cause the translation to be performed in transition mode instead of PDF mode.  
+  ![allowAccessToFileURL.png](https://github.com/T3aHat/DeepLopener/raw/main/images/allowAccessToFileURL.png)
 
 # 免責事項(Disclaimer)
 
