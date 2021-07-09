@@ -3,19 +3,19 @@
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/YlKi-NVJV-E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   
   
-1. Get your [DeepL API_KEY](https://www.deepl.com/en/pro/change-plan#developer).  
+1. **Get your [DeepL API_KEY](https://www.deepl.com/en/pro/change-plan#developer)**  
    ![free.png](https://cdn-ak.f.st-hatena.com/images/fotolife/t/t3ahat/20210516/20210516184206.png)
    If you use DeepL API Free, you can translate text for max. 500,000 characters/month.
 
-2.  Download [DeepLopener](https://chrome.google.com/webstore/detail/deepl-opener-pro/almdndhiblbhbnoaakhgefcpmbaoljde).
+2.  **Download [DeepLopener](https://chrome.google.com/webstore/detail/deepl-opener-pro/almdndhiblbhbnoaakhgefcpmbaoljde)**
     <iframe class="embed-card embed-webcard" style="display: block; width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;" title="DeepLopener" src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Fdeeplopener%2Falmdndhiblbhbnoaakhgefcpmbaoljde" frameborder="0" scrolling="no"></iframe>
 
-3.  Login to Chrome and enable synchronization.  
+3.  **Login to Chrome and enable synchronization**  
     ![syncon.png](https://github.com/T3aHat/DeepLopener/raw/main/images/syncon.png)  
     You need to login to Chrome and enable synchronization for security reasons.
     If you don’t want to log in to Chrome and sync, see [here](http://teahat.ml/DeepLopener/#chrome-sync).
 
-4.  Input your API_KEY and change a setting of API version on options page.  
+4.  **Input your API_KEY and change a setting of API version on options page**  
     ![options.png](https://github.com/T3aHat/DeepLopener/raw/main/images/options.png)
     - If you want to use Free version, change it as `Free`.
     - If you want to use Pro version, change it as `Pro`.
