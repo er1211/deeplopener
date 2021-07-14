@@ -39,7 +39,7 @@
   color: black;
 }
 .deeplopener_selecting {
-  border: solid 1px black;
+  outline: solid 1px black;
 }
 .deeplopener_icon {
   z-index: 9999;
