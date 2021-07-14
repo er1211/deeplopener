@@ -142,8 +142,8 @@ if (!ispdf) {
         } else {
           apiTranslate(true, elm, "layoutOrientedMode", -1, -1);
         }
-        $(document).off("mousemove");
-        $(document).off("contextmenu");
+        //$(document).off("mousemove");
+        //$(document).off("contextmenu");
         return false;
       });
     } else if (request.message == "cancelSelectionMode") {
