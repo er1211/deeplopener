@@ -1,23 +1,17 @@
-const now = new Date();
-const month = now.getMonth();
-chrome.storage.sync.get(null, function (items) {
-  let oldmonth = items.month;
-  if (typeof oldmonth !== "undefined" && oldmonth == month) {
-    alert(
-      "Please check the usage status to see if there is any suspicious usage history."
-    );
-    chrome.tabs.create({
-      url: "https://www.deepl.com/pro-account/usage",
-    });
-  }
-  chrome.storage.sync.set({
-    month: (month + 1) % 12,
-  });
-});
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason == "install") {
+    chrome.storage.sync.set(
+      {
+        target: "EN-US",
+        iconflag: "Enable",
+        hoverflag: "Enable",
+        freeflag: "Free",
+        deeplpro_apikey: [],
+      },
+      function () {}
+    );
     alert(
-      'Thank you for installing DeepLopener!\nBefore using this extension, input "DeepL API_KEY" on options page.'
+      'Thank you for installing DeepLopener!\nBefore using this extension, please input "DeepL API_KEY" on options page.'
     );
     chrome.runtime.openOptionsPage();
   } else if (details.reason == "update") {
@@ -77,6 +71,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     get_apikey(sender.tab.id);
   } else if (request.message == "updateBadgeText") {
     chrome.browserAction.setBadgeText({ text: request.text + "%" });
+  } else if (request.message == "injectJQueryUI") {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.insertCSS(sender.tab.id, { file: "jquery-ui.css" });
+      chrome.tabs.executeScript(sender.tab.id, { file: "jquery-ui.js" });
+      sendResponse();
+    });
   }
 });
 
@@ -86,7 +86,7 @@ function get_apikey(tabid) {
     chrome.identity.getProfileUserInfo(null, function (info) {
       if (info.id == "" || info.email == "") {
         alert(
-          "To use this extension, please sign in to chrome and sync turns on."
+          "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's GitHub repository."
         );
       } else {
         tmp = 0;

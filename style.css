@@ -1,17 +1,17 @@
-.translated {
+.deeplopener_translated {
   display: block;
   background-color: rgba(255, 255, 0, 0.05);
 }
 
-.text_oriented div {
+.deeplopener_text_oriented div {
   text-align: center;
 }
-.translating {
+.deeplopener_translating {
   display: block;
   background-color: rgba(255, 0, 0, 0.05);
 }
 
-.pdftranslated {
+.deeplopener_pdftranslated {
   position: absolute;
   display: block;
   margin: 0;
@@ -25,7 +25,7 @@
   overflow: scroll;
   padding: 10px;
 }
-.resultarea {
+.deeplopener_resultarea {
   position: fixed;
   background-color: #f0f0f0;
   border: solid 2px black;
@@ -35,11 +35,11 @@
   padding: 0 10px;
   z-index: 9999;
 }
-.hovertxt {
+.deeplopener_hovertxt {
   color: black;
 }
-.deeplopenerselecting {
-  border: solid 1px black;
+.deeplopener_selecting {
+  outline: solid 1px black;
 }
 .deeplopener_icon {
   z-index: 9999;

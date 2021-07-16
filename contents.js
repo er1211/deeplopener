@@ -1,11 +1,12 @@
-console.log("DeepLopener loaded");
-chrome.runtime.sendMessage({ message: "pleaseApiKey" }, function (res) {
-  if (chrome.runtime.lastError) {
-  }
-});
+console.log("DeepLopener: loaded");
+
 let ispdf;
 if (document.contentType === "application/pdf") {
   ispdf = true;
+  chrome.runtime.sendMessage({ message: "injectJQueryUI" }, function (res) {
+    if (chrome.runtime.lastError) {
+    }
+  });
 } else {
   ispdf = false;
 }
@@ -13,6 +14,8 @@ let api_key;
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message == "got_apikey") {
     api_key = request.api_key;
+    apiTranslate(tmplist[0], tmplist[1], tmplist[2], tmplist[3], tmplist[4]);
+    tmplist = []; //flush
     sendResponse();
   } else if (request.message == "page_translate") {
     $(document).off("mousemove");
@@ -104,7 +107,7 @@ if (!ispdf) {
         RemoveDeeplopenerSelecting();
         try {
           elm = document.elementFromPoint(x, y);
-          elm.classList.add("deeplopenerselecting");
+          elm.classList.add("deeplopener_selecting");
         } catch {}
       });
 
@@ -139,8 +142,8 @@ if (!ispdf) {
         } else {
           apiTranslate(true, elm, "layoutOrientedMode", -1, -1);
         }
-        $(document).off("mousemove");
-        $(document).off("contextmenu");
+        //$(document).off("mousemove");
+        //$(document).off("contextmenu");
         return false;
       });
     } else if (request.message == "cancelSelectionMode") {
@@ -173,10 +176,10 @@ function selectionTrans() {
     selectTextList = [];
   }
   let trelm = document.createElement("span");
-  trelm.className = "text_oriented";
-  trelm.setAttribute("id", "text_oriented" + selectionId);
+  trelm.className = "deeplopener_text_oriented";
+  trelm.setAttribute("id", "deeplopener_text_oriented" + selectionId);
   trelm.innerHTML =
-    "<span class='translating'>" +
+    "<span class='deeplopener_translating'>" +
     window.getSelection().toString().replace(/\n/g, "<br>") +
     "</span>";
   window.getSelection().getRangeAt(0).deleteContents();
@@ -203,8 +206,8 @@ function del_iconNode() {
 function RemoveDeeplopenerSelecting() {
   try {
     document
-      .querySelector(".deeplopenerselecting")
-      .classList.remove("deeplopenerselecting");
+      .querySelector(".deeplopener_selecting")
+      .classList.remove("deeplopener_selecting");
   } catch {}
 }
 let booltrans = [];
@@ -214,26 +217,25 @@ function textOrientedMode(txtlist, resData, selectionid) {
     let txt = txtlist[i];
     let trid = translationId;
     console.log(
-      translationId +
-        " Original:\n" +
+      " Original:\n" +
         txt +
         "\n\nTranslation results for DeepL (deepl.com) API:\n" +
         translation
     );
     booltrans[translationId] = true;
     $(function () {
-      $(".translated" + "#" + trid)
+      $(".deeplopener_translated" + "#" + trid)
         .off()
         .on("contextmenu", function () {
           window.getSelection().removeAllRanges();
           clickid = $(this).attr("id");
           if (booltrans[clickid] == true) {
             $(this).text(txt);
-            $(".hovertxt").text(translation);
+            $(".deeplopener_hovertxt").text(translation);
             booltrans[clickid] = false;
           } else {
             $(this).text(translation);
-            $(".hovertxt").text(txt);
+            $(".deeplopener_hovertxt").text(txt);
             booltrans[clickid] = true;
           }
           if (hoverflag) {
@@ -244,16 +246,18 @@ function textOrientedMode(txtlist, resData, selectionid) {
               $(this).outerHeight();
             let width = $(this).outerWidth();
             offsetCenterLeft = left + width / 2;
-            $(".resultarea").css({
+            $(".deeplopener_resultarea").css({
               top: top,
-              left: offsetCenterLeft - $(".resultarea").outerWidth() / 2,
+              left:
+                offsetCenterLeft -
+                $(".deeplopener_resultarea").outerWidth() / 2,
             });
           }
           del_iconNode();
           return false;
         });
       if (hoverflag) {
-        $(".translated" + "#" + trid).hover(
+        $(".deeplopener_translated" + "#" + trid).hover(
           function () {
             thisel = this;
             $(window).scroll(function () {
@@ -265,9 +269,9 @@ function textOrientedMode(txtlist, resData, selectionid) {
             function resultAreaUpdate(thisel) {
               $(thisel).css("outline", "2px solid black");
               let resultarea = document.createElement("div");
-              resultarea.className = "resultarea";
-              resultarea.innerHTML = "<div class=hovertxt></div>";
-              $(".resultarea").remove();
+              resultarea.className = "deeplopener_resultarea";
+              resultarea.innerHTML = "<div class=deeplopener_hovertxt></div>";
+              $(".deeplopener_resultarea").remove();
               document.body.append(resultarea);
               let left = $(thisel).offset().left - $(window).scrollLeft();
               let top =
@@ -276,19 +280,25 @@ function textOrientedMode(txtlist, resData, selectionid) {
                 $(thisel).outerHeight();
               var width = $(thisel).outerWidth();
               offsetCenterLeft = left + width / 2;
-              $(".resultarea").css({
+              $(".deeplopener_resultarea").css({
                 display: "block",
                 width: width * 0.75,
               });
               clickid = $(thisel).attr("id");
               if (booltrans[clickid] == true) {
-                $(".hovertxt").append($("<span>" + txt + "</span>"));
+                $(".deeplopener_hovertxt").append(
+                  $("<span>" + txt + "</span>")
+                );
               } else {
-                $(".hovertxt").append($("<span>" + translation + "</span>"));
+                $(".deeplopener_hovertxt").append(
+                  $("<span>" + translation + "</span>")
+                );
               }
-              $(".resultarea").css({
+              $(".deeplopener_resultarea").css({
                 top: top,
-                left: offsetCenterLeft - $(".resultarea").outerWidth() / 2,
+                left:
+                  offsetCenterLeft -
+                  $(".deeplopener_resultarea").outerWidth() / 2,
               });
             }
             resultAreaUpdate(this);
@@ -296,21 +306,23 @@ function textOrientedMode(txtlist, resData, selectionid) {
           function () {
             $(this).css("outline", "");
             thisel = undefined;
-            $(".resultarea").remove();
+            $(".deeplopener_resultarea").remove();
           }
         );
       }
     });
-    let text_oriented = document.querySelector("#text_oriented" + selectionid);
+    let text_oriented = document.querySelector(
+      "#deeplopener_text_oriented" + selectionid
+    );
     if (
-      $("#text_oriented" + selectionid)
+      $("#deeplopener_text_oriented" + selectionid)
         .children()
-        .hasClass("translating")
+        .hasClass("deeplopener_translating")
     ) {
       text_oriented.innerHTML = "";
     }
     let newNode = document.createElement("span");
-    newNode.className = "translated";
+    newNode.className = "deeplopener_translated";
     newNode.setAttribute("id", translationId);
     newNode.innerHTML = translation + "<br>";
     text_oriented.appendChild(newNode);
@@ -321,7 +333,7 @@ function textOrientedMode(txtlist, resData, selectionid) {
 
 function pdfMode(translation, translationid) {
   $(
-    "<span class='pdftranslated' id='pdftransid" +
+    "<span class='deeplopener_pdftranslated' id='pdftransid" +
       translationid +
       "''>" +
       translation
@@ -330,8 +342,11 @@ function pdfMode(translation, translationid) {
       "</span>"
   ).appendTo("html");
   $("#pdftransid" + translationid).draggable({ scroll: false });
-  $(".pdftranslated").css("max-height", $(window).height() * 0.9 + "px");
-  $(".pdftranslated").resizable({
+  $(".deeplopener_pdftranslated").css(
+    "max-height",
+    $(window).height() * 0.9 + "px"
+  );
+  $(".deeplopener_pdftranslated").resizable({
     handles: "n, e, s, w, ne, se, sw, nw",
   });
   $("html").on("contextmenu", function (e) {
@@ -364,10 +379,11 @@ function updateBadgeText(freeflag) {
         (resData.character_count / resData.character_limit) * 100
       );
       console.log(
-        resData.character_count +
+        "DeepLopener: " +
+          resData.character_count +
           "/" +
           resData.character_limit +
-          " characters translated so far in the current billing period.\n"
+          " characters translated.\n"
       );
       chrome.runtime.sendMessage(
         { message: "updateBadgeText", text: percent },
@@ -380,132 +396,141 @@ function updateBadgeText(freeflag) {
   });
 }
 
+let tmplist = [];
 function apiTranslate(iselm, elm, mode, selectionid, translationid) {
-  let targetHtml;
-  if (iselm) {
-    targetHtml = elm.innerHTML;
-  } else {
-    targetHtml = elm;
-  }
-  chrome.storage.sync.get(null, function (items) {
-    let target = items.target;
-    let freeflag = items.freeflag;
-    if (typeof target === "undefined") {
-      target = "EN-US";
-    }
-    let api_url;
-    if (freeflag == "Free") {
-      api_url = "https://api-free.deepl.com/v2/translate";
-    } else {
-      api_url = "https://api.deepl.com/v2/translate";
-    }
-    let params = {
-      auth_key: api_key,
-      target_lang: target,
-      tag_handling: "xml",
-    };
-    if (mode != "textOrientedMode") {
-      params.text = targetHtml;
-      translationId++;
-    }
-    let data = new URLSearchParams();
-    Object.keys(params).forEach((key) => data.append(key, params[key]));
-    if (mode == "textOrientedMode") {
-      elm.forEach((text) => {
-        data.append("text", text);
-      });
-    }
-    fetch(api_url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; utf-8",
-      },
-      body: data,
-    }).then((res) => {
-      if (res.status == "200") {
-        res.json().then((resData) => {
-          let translation = resData.translations[0].text;
-          if (mode == "layoutOrientedMode") {
-            elm.innerHTML = translation;
-          } else if (mode == "textOrientedMode") {
-            textOrientedMode(elm, resData, selectionid);
-          } else if (mode == "pdfMode") {
-            pdfMode(translation, translationid);
-          }
-        });
-        updateBadgeText(freeflag);
-      } else {
-        elm.innerHTML =
-          "This is a sample of the translation result from DeepLopener .";
-        switch (res.status) {
-          case 400:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nBad request. Please check error message and your parameters."
-            );
-            break;
-          case 403:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nAuthorization failed. Please supply a valid auth_key parameter."
-            );
-            break;
-          case 404:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nThe requested resource could not be found."
-            );
-            break;
-          case 413:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nThe request size exceeds the limit."
-            );
-            break;
-          case 414:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nThe request URL is too long."
-            );
-            break;
-          case 429:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nToo many requests. Please wait and resend your request."
-            );
-            break;
-          case 456:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nQuota exceeded. The character limit has been reached."
-            );
-            break;
-          case 503:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nResource currently unavailable. Try again later."
-            );
-            break;
-          case 529:
-            alert(
-              "DeepLopener Error : " +
-                res.status +
-                "\nToo many requests. Please wait and resend your request."
-            );
-            break;
-          default:
-            alert("DeepLopener Error : " + res.status);
-        }
+  if (api_key === undefined) {
+    tmplist = [iselm, elm, mode, selectionid, translationid];
+    chrome.runtime.sendMessage({ message: "pleaseApiKey" }, function (res) {
+      if (chrome.runtime.lastError) {
       }
-      window.getSelection().removeAllRanges();
     });
-  });
+  } else {
+    let targetHtml;
+    if (iselm) {
+      targetHtml = elm.innerHTML;
+    } else {
+      targetHtml = elm;
+    }
+    chrome.storage.sync.get(null, function (items) {
+      let target = items.target;
+      let freeflag = items.freeflag;
+      if (typeof target === "undefined") {
+        target = "EN-US";
+      }
+      let api_url;
+      if (freeflag == "Free") {
+        api_url = "https://api-free.deepl.com/v2/translate";
+      } else {
+        api_url = "https://api.deepl.com/v2/translate";
+      }
+      let params = {
+        auth_key: api_key,
+        target_lang: target,
+        tag_handling: "xml",
+      };
+      if (mode != "textOrientedMode") {
+        params.text = targetHtml;
+        translationId++;
+      }
+      let data = new URLSearchParams();
+      Object.keys(params).forEach((key) => data.append(key, params[key]));
+      if (mode == "textOrientedMode") {
+        elm.forEach((text) => {
+          data.append("text", text);
+        });
+      }
+      fetch(api_url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; utf-8",
+        },
+        body: data,
+      }).then((res) => {
+        if (res.status == "200") {
+          res.json().then((resData) => {
+            let translation = resData.translations[0].text;
+            if (mode == "layoutOrientedMode") {
+              elm.innerHTML = translation;
+            } else if (mode == "textOrientedMode") {
+              textOrientedMode(elm, resData, selectionid);
+            } else if (mode == "pdfMode") {
+              pdfMode(translation, translationid);
+            }
+          });
+          updateBadgeText(freeflag);
+        } else {
+          elm.innerHTML =
+            "This is a sample of the translation result from DeepLopener .";
+          switch (res.status) {
+            case 400:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nBad request. Please check error message and your parameters."
+              );
+              break;
+            case 403:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nAuthorization failed. Please supply a valid auth_key parameter."
+              );
+              break;
+            case 404:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nThe requested resource could not be found."
+              );
+              break;
+            case 413:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nThe request size exceeds the limit."
+              );
+              break;
+            case 414:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nThe request URL is too long."
+              );
+              break;
+            case 429:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nToo many requests. Please wait and resend your request."
+              );
+              break;
+            case 456:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nQuota exceeded. The character limit has been reached."
+              );
+              break;
+            case 503:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nResource currently unavailable. Try again later."
+              );
+              break;
+            case 529:
+              alert(
+                "DeepLopener Error : " +
+                  res.status +
+                  "\nToo many requests. Please wait and resend your request."
+              );
+              break;
+            default:
+              alert("DeepLopener Error : " + res.status);
+          }
+        }
+        window.getSelection().removeAllRanges();
+      });
+    });
+  }
 }

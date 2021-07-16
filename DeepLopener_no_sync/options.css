@@ -1,0 +1,56 @@
+body {
+  user-select: none;
+}
+select {
+  margin-left: 5px;
+  cursor: pointer;
+}
+button {
+  cursor: pointer;
+}
+
+#message {
+  text-align: center;
+  height: 1rem;
+}
+#apitestm {
+  height: 2rem;
+  text-align: center;
+}
+
+.setting {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}
+.settingm {
+  width: 5.6rem;
+}
+
+.descparent {
+  position: relative;
+}
+
+.description {
+  position: absolute;
+  display: none;
+  padding: 2px;
+  background-color: lightgrey;
+  width: 260px;
+  left: -50px;
+  bottom: 100%;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+.description:after {
+  border-top: 12px solid lightgrey;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  bottom: -12px;
+  left: 70px;
+  content: "";
+  position: absolute;
+}
