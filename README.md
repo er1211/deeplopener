@@ -3,14 +3,14 @@
 [日本語解説記事](https://t3ahat.hateblo.jp/entry/How_to_use_DeepLopener)に日本語で詳しくインストール方法や使用方法を書いているので[こちら](https://t3ahat.hateblo.jp/entry/How_to_use_DeepLopener)を読んでください．  
 [How to use (YouTube) ](https://youtu.be/YlKi-NVJV-E)
 
-This Google chrome extension enable to replace the texts that you want to translate with translation results by DeepL(deepl.com) keepking the original style.  
-On pdf, this extension displays a frame showing translated sentences.
+This Google chrome extension can replace texts that you want to translate with translation results by DeepL(deepl.com) keepking the original style.  
+On pdf, this extension displays frames showing translated sentences.
 
 # Install from Chrome Web Store
 
-https://chrome.google.com/webstore/detail/deepl-opener/almdndhiblbhbnoaakhgefcpmbaoljde
+<a href="https://chrome.google.com/webstore/detail/deeplopener/almdndhiblbhbnoaakhgefcpmbaoljde" target="_blank" rel="noopener noreferrer"><img src="https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/HRs9MPufa1J1h5glNhut.png" alt="ChromeWebStore" ></a>
 
-# Web site of this extension
+# Web site
 
 https://teahat.ml/DeepLopener/
 
@@ -85,7 +85,7 @@ Please check the version of the API you are using and configure it appropriately
   →There are two main possibilities. The first is that the size of the page you want to translate is larger than 30kbytes. The second is CORS. In either case, please use the layout-oriented replacement mode instead. Please read the error codes in the Developer Tools for more information.
 
 - I can't use PDF mode on local PDF files.  
-   Ensure that the "Allow access to file URLs" is checked on options page of this extension like below.  
+  →Ensure that the "Allow access to file URLs" is checked on options page of this extension like below.  
    Improper settings may cause the translation to be performed in transition mode instead of PDF mode.  
   ![allowAccessToFileURL.png](https://github.com/T3aHat/DeepLopener/raw/main/images/allowAccessToFileURL.png)
 
