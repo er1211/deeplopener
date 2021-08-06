@@ -475,6 +475,7 @@ function apiTranslate(iselm, elm, mode, selectionid, translationid) {
                   res.status +
                   "\nAuthorization failed. Please supply a valid auth_key parameter."
               );
+              chrome.runtime.openOptionsPage();
               break;
             case 404:
               alert(
