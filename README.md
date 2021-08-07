@@ -17,8 +17,10 @@ https://teahat.ml/DeepLopener/
 # How to use
 
 **(1)【layout-oriented replacement mode】**  
-Click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the right-hand corner and
-move the cursor and right-click to select the text you want to translate or click to cancel to select.  
+Click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the upper right corner
+or right-click without selecting the text,
+move the cursor and right-click to translate, and left-click to cancel to select.  
+![layoutContextMenu.png](https://github.com/T3aHat/DeepLopener/blob/main/images/layoutContextMenu.png)  
 ![layout-oriented.gif](https://github.com/T3aHat/DeepLopener/blob/main/images/layout-oriented.gif)  
 The selected frame will be translated on layout-oriented replacement mode keeping the original style.  
 If you click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the right-hand corner and

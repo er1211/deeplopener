@@ -27,8 +27,9 @@ chrome.runtime.onInstalled.addListener(function (details) {
     }
   }
 });
+
 chrome.contextMenus.create({
-  title: "DeepL: %s",
+  title: "DeepL : %s",
   type: "normal",
   contexts: ["selection"],
   onclick: transition(),
@@ -59,6 +60,25 @@ function transition() {
                   info.selectionText,
               });
             });
+          }
+        }
+      );
+    });
+  };
+}
+chrome.contextMenus.create({
+  title: "DeepLopener",
+  type: "normal",
+  onclick: fireSelectionMode(),
+});
+function fireSelectionMode() {
+  return function (info) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        { message: "selectionMode" },
+        function (res) {
+          if (chrome.runtime.lastError) {
           }
         }
       );
