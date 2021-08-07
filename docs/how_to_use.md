@@ -4,7 +4,7 @@
   
   
 1. **Get your [DeepL API_KEY](https://www.deepl.com/en/pro/change-plan#developer)**  
-   ![free.png](https://cdn-ak.f.st-hatena.com/images/fotolife/t/t3ahat/20210516/20210516184206.png)
+   ![free.png](https://cdn-ak.f.st-hatena.com/images/fotolife/t/t3ahat/20210808/20210808042505.png)
    If you use DeepL API Free, you can translate text for max. 500,000 characters/month.
 
 2.  **Download [DeepLopener](https://chrome.google.com/webstore/detail/deepl-opener-pro/almdndhiblbhbnoaakhgefcpmbaoljde)**
@@ -25,7 +25,7 @@
 Click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the upper right corner
 or right-click without selecting the text,
 move the cursor and right-click to translate, and left-click to cancel to select.  
-![layoutContextMenu.png](https://github.com/T3aHat/DeepLopener/blob/main/images/layoutContextMenu.png)  
+![layoutContextMenu.png](https://github.com/T3aHat/DeepLopener/raw/main/images/layoutContextMenu.png)  
 ![layout-oriented.gif](https://github.com/T3aHat/DeepLopener/raw/main/images/layout-oriented.gif)  
 The selected frame will be translated on layout-oriented replacement mode keeping the original style.  
 If you click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the right-hand corner and
