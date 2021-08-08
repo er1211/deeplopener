@@ -97,6 +97,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       chrome.tabs.executeScript(sender.tab.id, { file: "jquery-ui.js" });
       sendResponse();
     });
+  } else if (request.message == "openOptionsPage") {
+    chrome.runtime.openOptionsPage();
   }
 });
 
