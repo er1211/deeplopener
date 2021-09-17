@@ -69,7 +69,7 @@ in the upper right corner of the popup window will take you to the document tran
 ![translating.png](https://github.com/T3aHat/DeepLopener/raw/main/images/translating.png)
 
 1. Select a target language
-2. Choose documents you want to translate  
+2. Choose documents you want to translate
    The following file types and extensions are supported:
 
 - "docx" - Microsoft Word Document
