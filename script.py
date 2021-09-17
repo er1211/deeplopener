@@ -10,12 +10,17 @@ with zipfile.ZipFile('DeepLopener.zip', 'w')as zf:
     zf.write('options.js')
     zf.write('options.html')
     zf.write('options.css')
+    zf.write('transDocs.js')
+    zf.write('transDocs.html')
+    zf.write('transDocs.css')
     zf.write('style.css')
     zf.write('jquery-3.5.1.min.js')
     zf.write('jquery-ui.js')
     zf.write('jquery-ui.css')
     zf.write('icon24.png')
     zf.write('icon128.png')
+    zf.write('file.png')
+    zf.write('earth.png')
     for folder, subfolders, files in os.walk('_locales'):
         zf.write(folder)
         for file in files:

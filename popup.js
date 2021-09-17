@@ -30,26 +30,15 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 
 document.querySelector("#pagetrans").onclick = function () {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    let conf = confirm("Are you sure you want to translate this page?");
-    if (conf == true) {
-      chrome.tabs.sendMessage(
-        tabs[0].id,
-        { message: "cancelSelectionMode" },
-        function (res) {
-          if (chrome.runtime.lastError) {
-          }
-          chrome.tabs.sendMessage(
-            tabs[0].id,
-            { message: "page_translate" },
-            function () {
-              if (chrome.runtime.lastError) {
-              }
-            }
-          );
-          window.close();
+    chrome.tabs.sendMessage(
+      tabs[0].id,
+      { message: "page_translate" },
+      function (res) {
+        if (chrome.runtime.lastError) {
         }
-      );
-    }
+        window.close();
+      }
+    );
   });
 };
 function restore_options() {

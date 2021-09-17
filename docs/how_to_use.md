@@ -20,7 +20,7 @@
     - If you want to use Free version, change it as `Free`.
     - If you want to use Pro version, change it as `Pro`.
 
-# layout-oriented replacement mode
+## layout-oriented replacement mode
 
 Click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the upper right corner
 or right-click without selecting the text,
@@ -32,7 +32,7 @@ If you click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/ma
 select `Translate this page!`, the whole page contents will be translated like below.  
 ![pagetrans.gif](https://github.com/T3aHat/DeepLopener/raw/main/images/pagetrans.gif)
 
-# PDF mode
+## PDF mode
 
 On PDF, select the text you want to translate and right-click on the text and click on `DeepL:selected_text`.  
 ![pdfmode.gif](https://github.com/T3aHat/DeepLopener/raw/main/images/pdfmode.gif)  
@@ -43,7 +43,7 @@ You can move the translation frame around freely in Drag-and-Drop, and right-cli
   Ensure that the "Allow access to file URLs" is checked on options page of this extension like below.
   ![allowAccessToFileURL.png](https://github.com/T3aHat/DeepLopener/raw/main/images/allowAccessToFileURL.png)
 
-# text-oriented replacement mode
+## text-oriented replacement mode
 
 With the text to be translated selected, press `Ctrl+X` (`⌘+X` on mac) twice within 1 second or click on the icon ![icno24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) that appears after selecting the text.  
 ![text-oriented.gif](https://github.com/T3aHat/DeepLopener/raw/main/images/text-oriented.gif)  
@@ -51,11 +51,38 @@ The selected text is highlighted in red first. After traslation , it turns yello
 Right-click on the translation to display the original text.If you do it again, the letters will be toggled back to translation.  
 It is recommended to use this mode separately from the layout-oriented replacement mode because the original layout will be destroyed.
 
-# transition mode
+## transition mode
 
 Right click on the text you want to translate → Click on `DeepL:selected_text`.  
 ![openDeepL.gif](https://github.com/T3aHat/DeepLopener/raw/main/images/openDeepL.gif)  
 Move to https://www.deepl.com/translator#ja/en/selected_text
+
+# Documents translation
+
+Document files can be translated from v1.2.0!  
+Click ![earth.png](https://github.com/T3aHat/DeepLopener/raw/main/earth.png) in the upper right corner of the popup window will take you to the document translation page.
+![earthIcon.png](https://github.com/T3aHat/DeepLopener/raw/main/images/earthIcon.png)
+
+## How to translate
+
+1. Select a target language
+2. Choose documents you want to translate  
+   The following file types and extensions are supported:
+
+- "docx" - Microsoft Word Document
+- "pptx" - Microsoft PowerPoint Document
+- "htm / html" - HTML Document
+- "txt" - Plain Text Document
+
+3. click `Translate` button and translate!
+   Translation status will be shown in `Translation status`.
+   - `Date`: Date and time of translation
+   - `Name`: File name
+   - `Language`: The selected target language
+   - `Progress`: Translation progress
+     - `translating`: Now translating. Click to update the latest status.
+     - `done`: Translated the file. Click to download the translated document.
+     - `error`: Translation failed. The error will be alerted and removed from `Translation status`.
 
 # Usage in the current billing period
 

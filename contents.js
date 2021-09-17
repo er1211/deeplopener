@@ -1,5 +1,3 @@
-console.log("DeepLopener: loaded");
-
 let ispdf;
 if (document.contentType === "application/pdf") {
   ispdf = true;
@@ -13,14 +11,22 @@ if (document.contentType === "application/pdf") {
 let api_key;
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message == "got_apikey") {
-    api_key = request.api_key;
-    apiTranslate(tmplist[0], tmplist[1], tmplist[2], tmplist[3], tmplist[4]);
-    tmplist = []; //flush
+    if (request.error) {
+      alert(
+        "To use this extension, please sign in to chrome and sync turns on.\n\nIf you are interested in another version that can be used without chrome synchronization, please check DeepLopener's GitHub repository."
+      );
+    } else {
+      api_key = request.api_key;
+      apiTranslate(tmplist[0], tmplist[1], tmplist[2], tmplist[3], tmplist[4]);
+      tmplist = []; //flush
+    }
     sendResponse();
   } else if (request.message == "page_translate") {
     $(document).off("mousemove");
     $(document).off("contextmenu");
-    apiTranslate(true, document.body, "layoutOrientedMode", -1, -1);
+    if (confirm("Are you sure you want to translate this page?")) {
+      apiTranslate(true, document.body, "layoutOrientedMode", -1, -1);
+    }
     sendResponse();
   } else if (request.message == "ispdf") {
     sendResponse(ispdf);
@@ -29,6 +35,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       apiTranslate(false, request.selectionText, "pdfMode", -1, translationId);
     }
     sendResponse(ispdf);
+  } else if (request.message == "alertError") {
+    alertError(request.res);
   }
   return false;
 });
@@ -146,11 +154,6 @@ if (!ispdf) {
         //$(document).off("contextmenu");
         return false;
       });
-    } else if (request.message == "cancelSelectionMode") {
-      sendResponse();
-      $(document).off("mousemove");
-      $(document).off("contextmenu");
-      RemoveDeeplopenerSelecting();
     }
   });
 }
@@ -396,14 +399,88 @@ function updateBadgeText(freeflag) {
   });
 }
 
+function alertError(res) {
+  switch (res) {
+    case 400:
+      alert(
+        "DeepLopener Error : " +
+          res.status +
+          "\nBad request. Please check error message and your parameters."
+      );
+      break;
+    case 403:
+      alert(
+        "DeepLopener Error : " +
+          res +
+          "\nAuthorization failed. Please supply a valid auth_key parameter."
+      );
+      chrome.runtime.sendMessage(
+        { message: "openOptionsPage" },
+        function (res) {
+          if (chrome.runtime.lastError) {
+          }
+        }
+      );
+      break;
+    case 404:
+      alert(
+        "DeepLopener Error : " +
+          res +
+          "\nThe requested resource could not be found."
+      );
+      break;
+    case 413:
+      alert(
+        "DeepLopener Error : " + res + "\nThe request size exceeds the limit."
+      );
+      break;
+    case 414:
+      alert("DeepLopener Error : " + res + "\nThe request URL is too long.");
+      break;
+    case 429:
+      alert(
+        "DeepLopener Error : " +
+          res +
+          "\nToo many requests. Please wait and resend your request."
+      );
+      break;
+    case 456:
+      alert(
+        "DeepLopener Error : " +
+          res +
+          "\nQuota exceeded. The character limit has been reached."
+      );
+      break;
+    case 503:
+      alert(
+        "DeepLopener Error : " +
+          res +
+          "\nResource currently unavailable. Try again later."
+      );
+      break;
+    case 529:
+      alert(
+        "DeepLopener Error : " +
+          res +
+          "\nToo many requests. Please wait and resend your request."
+      );
+      break;
+    default:
+      alert("DeepLopener Error : " + res);
+  }
+}
+
 let tmplist = [];
 function apiTranslate(iselm, elm, mode, selectionid, translationid) {
   if (api_key === undefined) {
     tmplist = [iselm, elm, mode, selectionid, translationid];
-    chrome.runtime.sendMessage({ message: "pleaseApiKey" }, function (res) {
-      if (chrome.runtime.lastError) {
+    chrome.runtime.sendMessage(
+      { message: "pleaseApiKey", runtimeflag: false },
+      function (res) {
+        if (chrome.runtime.lastError) {
+        }
       }
-    });
+    );
   } else {
     let targetHtml;
     if (iselm) {
@@ -460,81 +537,8 @@ function apiTranslate(iselm, elm, mode, selectionid, translationid) {
           updateBadgeText(freeflag);
         } else {
           elm.innerHTML =
-            "This is a sample of the translation result from DeepLopener .";
-          switch (res.status) {
-            case 400:
-              alert(
-                "DeepLopener Error : " +
-                  res.status +
-                  "\nBad request. Please check error message and your parameters."
-              );
-              break;
-            case 403:
-              alert(
-                "DeepLopener Error : " +
-                  res.status +
-                  "\nAuthorization failed. Please supply a valid auth_key parameter."
-              );
-              chrome.runtime.sendMessage(
-                { message: "openOptionsPage" },
-                function (res) {
-                  if (chrome.runtime.lastError) {
-                  }
-                }
-              );
-              break;
-            case 404:
-              alert(
-                "DeepLopener Error : " +
-                  res.status +
-                  "\nThe requested resource could not be found."
-              );
-              break;
-            case 413:
-              alert(
-                "DeepLopener Error : " +
-                  res.status +
-                  "\nThe request size exceeds the limit."
-              );
-              break;
-            case 414:
-              alert(
-                "DeepLopener Error : " +
-                  res.status +
-                  "\nThe request URL is too long."
-              );
-              break;
-            case 429:
-              alert(
-                "DeepLopener Error : " +
-                  res.status +
-                  "\nToo many requests. Please wait and resend your request."
-              );
-              break;
-            case 456:
-              alert(
-                "DeepLopener Error : " +
-                  res.status +
-                  "\nQuota exceeded. The character limit has been reached."
-              );
-              break;
-            case 503:
-              alert(
-                "DeepLopener Error : " +
-                  res.status +
-                  "\nResource currently unavailable. Try again later."
-              );
-              break;
-            case 529:
-              alert(
-                "DeepLopener Error : " +
-                  res.status +
-                  "\nToo many requests. Please wait and resend your request."
-              );
-              break;
-            default:
-              alert("DeepLopener Error : " + res.status);
-          }
+            "This is a sample of the translation result from DeepLopener.";
+          alertError(res.status);
         }
         window.getSelection().removeAllRanges();
       });

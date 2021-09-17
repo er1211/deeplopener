@@ -1,12 +1,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="popup.css">
+        <link rel="stylesheet" href="transDocs.css">
     </head>
     <body>
         <div id="close">×</div>
-        <div id="title"><img src="../icon24.png"/>DeepLopener<a href="../transDocs.html"><img src="../earth.png" height="20px"/></a>
-        </div>    
+        <div id="title"><img src="../icon24.png"/>DeepLopener<a href="../popup.html"><img src="../file.png"  height="20px"/></a>
+        </div>
         <p style="margin: 0; margin-top:10px; text-align: center;">Target language:
             <select id="target" style="cursor: pointer;">
                 <option value="JA">日本語</option>
@@ -38,10 +38,26 @@
             </select>
         </p>
         <div>
-            <button type="button" id="pagetrans">Translate this page!
-                </button>
+            <div style="font-size: 1rem;">Choose documents</div>
+            <div id="selectedfiles"></div>
+            <label for="browsebtn" class="filelabel">Browse</label>
+            <input type="file" name="fileinput" id="browsebtn" class="fileinput" multiple accept=".docx,.pptx,.htm,.html,.txt">
+            <label for="translatebtn" class="filelabel">Translate</label>
+            <input type="button" name="fileinput" id="translatebtn" class="fileinput">    
         </div>
-        <p id="message"></p>
-        <script src="popup.js"></script>
+
+        <div>
+            <div style="font-size: 1rem;">Translation status</div>
+                <table id="translogTable">
+                    <tbody id="tbody_translogTable">
+                        <tr>
+                            <th>Date</th> <th>Name</th> <th>Language</th> <th>Progress</th>
+                        </tr>    
+                    </tbody>
+                </table>                    
+        </div>
+
+
+        <script src="transDocs.js"></script>
     </body>
 </html>

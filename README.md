@@ -16,6 +16,8 @@ https://teahat.ml/DeepLopener/
 
 # How to use
 
+## Text translation
+
 **(1)【layout-oriented replacement mode】**  
 Click the icon ![icon24.png](https://github.com/T3aHat/DeepLopener/raw/main/icon24.png) in the upper right corner
 or right-click without selecting the text,
@@ -49,6 +51,33 @@ Move to https://www.deepl.com/translator#ja/en/selected_text
 The number of characters translated so far in the current billing period is displayed in the upper right icon.  
  ![usage.png](https://github.com/T3aHat/DeepLopener/raw/main/images/usage.png)  
  _I translated 11% (55000/500000) characters in the current billing period with DeepL API Free._
+
+## Documents translation
+
+Document files can be translated from v1.2.0!  
+Click ![earth.png](https://github.com/T3aHat/DeepLopener/raw/main/earth.png) in the upper right corner of the popup window will take you to the document translation page.
+![earthIcon.png](https://github.com/T3aHat/DeepLopener/raw/main/images/earthIcon.png)
+
+### How to translate
+
+1. Select a target language
+2. Choose documents you want to translate  
+   The following file types and extensions are supported:
+
+- "docx" - Microsoft Word Document
+- "pptx" - Microsoft PowerPoint Document
+- "htm / html" - HTML Document
+- "txt" - Plain Text Document
+
+3. click `Translate` button and translate!
+   Translation status will be shown in `Translation status`.
+   - `Date`: Date and time of translation
+   - `Name`: File name
+   - `Language`: The selected target language
+   - `Progress`: Translation progress
+     - `translating`: Now translating. Click to update the latest status.
+     - `done`: Translated the file. Click to download the translated document.
+     - `error`: Translation failed. The error will be alerted and removed from `Translation status`.
 
 # Options
 

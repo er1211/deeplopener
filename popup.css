@@ -7,6 +7,7 @@ body {
 }
 img {
   margin-right: 4px;
+  margin-left: 10px;
 }
 #title {
   display: flex;
@@ -16,6 +17,7 @@ img {
 }
 #pagetrans {
   cursor: pointer;
+  margin-top: 1rem;
 }
 #message {
   text-align: center;
