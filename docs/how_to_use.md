@@ -1,7 +1,6 @@
 # How to use
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/YlKi-NVJV-E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/GrlLDQDQ8hY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   
 1. **Get your [DeepL API_KEY](https://www.deepl.com/en/pro/change-plan#developer)**  
    ![free.png](https://cdn-ak.f.st-hatena.com/images/fotolife/t/t3ahat/20210808/20210808042505.png)
@@ -57,7 +56,7 @@ Right click on the text you want to translate → Click on `DeepL:selected_text`
 ![openDeepL.gif](https://github.com/T3aHat/DeepLopener/raw/main/images/openDeepL.gif)  
 Move to https://www.deepl.com/translator#ja/en/selected_text
 
-# Documents translation
+# Document translation
 
 Document files can be translated from v1.2.0!  
 Click

@@ -81,8 +81,6 @@ function translateDocs() {
   }
 }
 
-function alertError(status) {}
-
 function translate(file) {
   chrome.storage.sync.get(null, function (items) {
     let target_lang = items.target;
@@ -133,6 +131,7 @@ function translate(file) {
               function () {
                 check(
                   false,
+                  null,
                   null,
                   date,
                   file.name,
@@ -207,6 +206,7 @@ function updateBadgeText(freeflag) {
 function check(
   updateflag,
   cellText,
+  oldrow,
   date,
   fileName,
   target_lang,
@@ -248,6 +248,7 @@ function check(
             row.appendChild(cell);
           } else {
             cellText.textContent = transdatalist[i];
+            row = oldrow;
           }
           if (i == transdatalist.length - 1) {
             if (resData.status == "done") {
@@ -273,6 +274,7 @@ function check(
                 check(
                   true,
                   cellText,
+                  row,
                   date,
                   fileName,
                   target_lang,
@@ -302,6 +304,7 @@ function restore_translogTable() {
     translatingDatalist.forEach((translatingData) => {
       check(
         false,
+        null,
         null,
         translatingData.date,
         translatingData.fileName,
