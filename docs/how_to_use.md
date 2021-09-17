@@ -60,10 +60,14 @@ Move to https://www.deepl.com/translator#ja/en/selected_text
 # Documents translation
 
 Document files can be translated from v1.2.0!  
-Click ![earth.png](https://github.com/T3aHat/DeepLopener/raw/main/earth.png) in the upper right corner of the popup window will take you to the document translation page.
+Click
+<img src="https://github.com/T3aHat/DeepLopener/raw/main/earth.png"  height="20px"/>
+in the upper right corner of the popup window will take you to the document translation page.
 ![earthIcon.png](https://github.com/T3aHat/DeepLopener/raw/main/images/earthIcon.png)
 
 ## How to translate
+
+![translating.png](https://github.com/T3aHat/DeepLopener/raw/main/images/translating.png)
 
 1. Select a target language
 2. Choose documents you want to translate  
@@ -72,7 +76,8 @@ Click ![earth.png](https://github.com/T3aHat/DeepLopener/raw/main/earth.png) in 
 - "docx" - Microsoft Word Document
 - "pptx" - Microsoft PowerPoint Document
 - "htm / html" - HTML Document
-- "txt" - Plain Text Document
+- "txt" - Plain Text Document  
+  Please check out [the official reference document](https://www.deepl.com/docs-api/translating-documents/uploading/) for details.
 
 3. click `Translate` button and translate!
    Translation status will be shown in `Translation status`.
