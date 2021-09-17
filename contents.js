@@ -28,6 +28,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       apiTranslate(true, document.body, "layoutOrientedMode", -1, -1);
     }
     sendResponse();
+  } else if (request.message == "cancelSelectionMode") {
+    $(document).off("mousemove");
+    $(document).off("contextmenu");
+    RemoveDeeplopenerSelecting();
+    sendResponse();
   } else if (request.message == "ispdf") {
     sendResponse(ispdf);
   } else if (request.message == "ContextMenu") {
