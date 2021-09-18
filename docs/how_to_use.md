@@ -71,13 +71,11 @@ in the upper right corner of the popup window will take you to the document tran
 1. Select a target language
 2. Choose documents you want to translate
    The following file types and extensions are supported:
-
 - "docx" - Microsoft Word Document
 - "pptx" - Microsoft PowerPoint Document
 - "htm / html" - HTML Document
 - "txt" - Plain Text Document  
   Please check out [the official reference document](https://www.deepl.com/docs-api/translating-documents/uploading/) for details.
-
 3. click `Translate` button and translate!
    Translation status will be shown in `Translation status`.
    - `Date`: Date and time of translation

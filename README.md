@@ -75,7 +75,6 @@ in the upper right corner of the popup window will take you to the document tran
 - "htm / html" - HTML Document
 - "txt" - Plain Text Document  
   Please check out [the official reference document](https://www.deepl.com/docs-api/translating-documents/uploading/) for details.
-
 3. click `Translate` button and translate!
    Translation status will be shown in `Translation status`.
    - `Date`: Date and time of translation
