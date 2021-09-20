@@ -371,6 +371,8 @@ function dl(row, fileName, docid, dockey) {
               tabs[0].id,
               { message: "alertError", res: res.status },
               function (res) {
+                row.remove();
+                removeLocalData(docid);
                 if (chrome.runtime.lastError) {
                 }
               }
