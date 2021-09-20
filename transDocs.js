@@ -30,21 +30,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 });
 
-let files;
-document.querySelector("#browsebtn").addEventListener("change", function (evt) {
-  files = evt.target.files;
-  let selectedfiles = document.querySelector("#selectedfiles");
-  while (selectedfiles.firstChild) {
-    selectedfiles.removeChild(selectedfiles.firstChild);
-  }
-  for (var i = 0; i < files.length; i++) {
-    let newNode = document.createElement("p");
-    newNode.className = "selectedfile";
-    newNode.textContent = files[i].name;
-    selectedfiles.appendChild(newNode);
-  }
-});
-
 function winclose() {
   window.close();
 }
@@ -364,6 +349,8 @@ function dl(row, fileName, docid, dockey) {
           removeLocalData(docid);
         });
       } else {
+        row.remove();
+        removeLocalData(docid);
         chrome.tabs.query(
           { active: true, currentWindow: true },
           function (tabs) {
@@ -371,8 +358,6 @@ function dl(row, fileName, docid, dockey) {
               tabs[0].id,
               { message: "alertError", res: res.status },
               function (res) {
-                row.remove();
-                removeLocalData(docid);
                 if (chrome.runtime.lastError) {
                 }
               }
@@ -383,7 +368,23 @@ function dl(row, fileName, docid, dockey) {
     });
   });
 }
-
+let files;
+document.querySelector("#browsebtn").addEventListener("change", function (evt) {
+  files = evt.target.files;
+  let selectedfiles = document.querySelector("#selectedfiles");
+  while (selectedfiles.firstChild) {
+    selectedfiles.removeChild(selectedfiles.firstChild);
+  }
+  for (var i = 0; i < files.length; i++) {
+    let newNode = document.createElement("p");
+    newNode.className = "selectedfile";
+    newNode.textContent = files[i].name;
+    selectedfiles.appendChild(newNode);
+  }
+});
+document.querySelector("#browsebtn").addEventListener("click", function (evt) {
+  evt.target.value = "";
+});
 document.querySelector("#target").addEventListener("change", change);
 document.querySelector("#close").addEventListener("click", winclose);
 document
