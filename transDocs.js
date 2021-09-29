@@ -134,7 +134,7 @@ function translate(file) {
           function (tabs) {
             chrome.tabs.sendMessage(
               tabs[0].id,
-              { message: "alertError", res: res },
+              { message: "alertError", res: res.status },
               function (res) {
                 if (chrome.runtime.lastError) {
                 }
