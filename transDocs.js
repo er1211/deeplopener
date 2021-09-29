@@ -286,6 +286,15 @@ function check(
 function restore_translogTable() {
   chrome.storage.local.get(null, function (items) {
     let translatingDatalist = items.translatingData;
+    if (!items.translatingData) {
+      // 過去verからアップデートした場合items.translatingDataがなくてエラーになる
+      chrome.storage.local.set(
+        {
+          translatingData: [],
+        },
+        function () {}
+      );
+    }
     translatingDatalist.forEach((translatingData) => {
       check(
         false,

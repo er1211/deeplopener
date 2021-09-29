@@ -58,10 +58,12 @@ Move to https://www.deepl.com/translator#ja/en/selected_text
 
 # Document translation
 
+![doctrans.gif](https://github.com/T3aHat/DeepLopener/raw/main/images/doctrans.gif)  
+
 Document files can be translated from v1.2.0!  
 Click
 <img src="https://github.com/T3aHat/DeepLopener/raw/main/earth.png"  height="20px"/>
-in the upper right corner of the popup window will take you to the document translation page.
+in the upper right corner of the popup window will take you to the document translation page.  
 ![earthIcon.png](https://github.com/T3aHat/DeepLopener/raw/main/images/earthIcon.png)
 
 ## How to translate
