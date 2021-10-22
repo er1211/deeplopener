@@ -1,6 +1,6 @@
 {
   "appDesc": {
-    "message": "Display translation results on PDFs and translate pages using the DeepL API (Unofficial)",
-    "description":"Display translation results on PDFs and translate pages using the DeepL API (Unofficial)"
+    "message": "An extension that can translate pages & display translation results on PDF using the DeepL API (Unofficial)",
+    "description":"An extension that can translate pages & display translation results on PDF using the DeepL API (Unofficial)"
   }
 }

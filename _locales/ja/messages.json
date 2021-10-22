@@ -1,6 +1,6 @@
 {
   "appDesc": {
-    "message": "DeepL APIを用いてPDF上に翻訳結果を表示したり、ページ翻訳できる拡張機能 (Unofficial)",
-    "description":"DeepL APIを用いてPDF上に翻訳結果を表示したり、ページ翻訳できる拡張機能 (Unofficial)"
+    "message": "DeepL APIを用いてページ翻訳 & PDF上に翻訳結果を表示できる拡張機能 (Unofficial)",
+    "description":"DeepL APIを用いてページ翻訳 & PDF上に翻訳結果を表示できる拡張機能 (Unofficial)"
   }
 }
