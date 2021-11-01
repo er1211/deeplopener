@@ -1,6 +1,6 @@
 # How to use
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/GrlLDQDQ8hY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/iptT7NxNoz4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   
 1. **Get your [DeepL API_KEY](https://www.deepl.com/en/pro/change-plan#developer)**  
    ![free.png](https://cdn-ak.f.st-hatena.com/images/fotolife/t/t3ahat/20210808/20210808042505.png)
@@ -75,6 +75,9 @@ in the upper right corner of the popup window will take you to the document tran
    The following file types and extensions are supported:
 - "docx" - Microsoft Word Document
 - "pptx" - Microsoft PowerPoint Document
+- "pdf" - Portable Document Format  
+  Please note that in order to translate PDF documents you need to give one-time consent to using the Adobe API via [the account interface](https://www.deepl.com/pro-account/translationSettings).
+  ![PDFTranslationSettings.png](https://github.com/T3aHat/DeepLopener/blob/main/images/PDFTranslationSettings.png)  
 - "htm / html" - HTML Document
 - "txt" - Plain Text Document  
   Please check out [the official reference document](https://www.deepl.com/docs-api/translating-documents/uploading/) for details.
@@ -83,8 +86,8 @@ in the upper right corner of the popup window will take you to the document tran
    - `Date`: Date and time of translation
    - `Name`: File name
    - `Language`: The selected target language
-   - `Progress`: Translation progress
-     - `translating`: Now translating. Click to update the latest status.
+   - `Progress`: Translation progress (is automatically updated at 5-second intervals)
+     - `translating`: Now translating.
      - `done`: Translated the file. Click to download the translated document.
      - `error`: Translation failed. The error will be alerted and removed from `Translation status`.
 

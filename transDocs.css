@@ -95,9 +95,6 @@ tr {
   font-size: 75%;
 }
 
-.transRow {
-}
-
 #translogTable {
   margin: auto;
 }
@@ -108,11 +105,9 @@ tr {
 }
 .translating {
   display: inline-block;
-  cursor: pointer;
   color: red;
 }
 .error {
   display: inline-block;
-  cursor: pointer;
   color: red;
 }

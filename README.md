@@ -1,7 +1,7 @@
 # DeepLopener
 
 [日本語解説記事](https://t3ahat.hateblo.jp/entry/How_to_use_DeepLopener)に日本語で詳しくインストール方法や使用方法を書いているので[こちら](https://t3ahat.hateblo.jp/entry/How_to_use_DeepLopener)を読んでください．  
-[How to use (YouTube) ](https://www.youtube.com/watch?v=GrlLDQDQ8hY)
+[How to use (YouTube) ](https://www.youtube.com/watch?v=iptT7NxNoz4)
 
 This Google chrome extension can replace texts that you want to translate with translation results by DeepL(deepl.com) keepking the original style.  
 On pdf, this extension displays frames showing translated sentences.
@@ -72,6 +72,9 @@ in the upper right corner of the popup window will take you to the document tran
 
 - "docx" - Microsoft Word Document
 - "pptx" - Microsoft PowerPoint Document
+- "pdf" - Portable Document Format  
+  Please note that in order to translate PDF documents you need to give one-time consent to using the Adobe API via [the account interface](https://www.deepl.com/pro-account/translationSettings).
+  ![PDFTranslationSettings.png](https://github.com/T3aHat/DeepLopener/blob/main/images/PDFTranslationSettings.png)  
 - "htm / html" - HTML Document
 - "txt" - Plain Text Document  
   Please check out [the official reference document](https://www.deepl.com/docs-api/translating-documents/uploading/) for details.
@@ -80,8 +83,8 @@ in the upper right corner of the popup window will take you to the document tran
    - `Date`: Date and time of translation
    - `Name`: File name
    - `Language`: The selected target language
-   - `Progress`: Translation progress
-     - `translating`: Now translating. Click to update the latest status.
+   - `Progress`: Translation progress (is automatically updated at 5-second intervals)
+     - `translating`: Now translating. 
      - `done`: Translation completed. Click to download the translated document.
      - `error`: Translation failed. The error will be alerted and removed from `Translation status`.
 
@@ -129,7 +132,7 @@ Please check the version of the API you are using and configure it appropriately
 # 免責事項(Disclaimer)
 
 - 本拡張機能は非公式です．問題がある場合は即公開停止するので，連絡してください．また，いかなる場合も，本拡張機能の利用に起因した損害に対して一切の責任と義務を負いません．
-- ページ翻訳は大量の characters を送信する可能性があるので十分に注意して実行してください．  
+- ページ翻訳は大量のテキストを送信する可能性があるので十分に注意して実行してください．  
   意図しない挙動を起こしても一切責任を負いません．  
   DeepL API を契約する際に**API 使用額上限を低めに設定**することを強く推奨します．
 - 脆弱性により API の秘密鍵等が流出する可能性があります． **使用する場合はリスクを考慮したうえで自己責任で使用してください．ソースコードの挙動を理解できない場合は使用しないでください．** 開発者は一切責任を負いません．

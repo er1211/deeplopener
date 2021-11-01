@@ -247,15 +247,26 @@ function check(
                 fileName.match(reg)[2];
               cellText.addEventListener("click", () => {
                 dl(row, newFileName, docid, dockey);
+                updateBadgeText(freeflag);
               });
-            } else if (resData.status == "translating") {
-              cellText.className = "translating";
-              if (!isNaN(resData.seconds_remaining)) {
-                cellText.textContent =
-                  transdatalist[i] + " (" + resData.seconds_remaining + ")";
+            } else if (resData.status == "error") {
+              cellText.className = "error";
+              function remove() {
+                row.remove();
+                removeLocalData(docid);
               }
-              cellText.addEventListener("click", () => {
-                //recheck status(updateflag=true)
+              setTimeout(remove, 3000);
+            } else {
+              //translating and queued
+              cellText.className = "translating";
+              cellText.textContent = transdatalist[i];
+              if (
+                !isNaN(resData.seconds_remaining) &&
+                resData.seconds_remaining != 2147483647
+              ) {
+                cellText.textContent += " (" + resData.seconds_remaining + ")";
+              }
+              function wrapCheck() {
                 check(
                   true,
                   cellText,
@@ -266,14 +277,8 @@ function check(
                   docid,
                   dockey
                 );
-              });
-            } else if (resData.status == "error") {
-              cellText.className = "error";
-              function remove() {
-                row.remove();
-                removeLocalData(docid);
               }
-              setTimeout(remove, 3000);
+              setTimeout(wrapCheck, 5000);
             }
           }
         }
